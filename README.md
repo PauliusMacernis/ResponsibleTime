@@ -5,6 +5,7 @@ THE LIST IS ON ARCHITECTURING PHASE. THEREFORE IT MAY CHANGE A BIT. TRYING TO FI
 
 TODO: lists to make:
 - List JIRA systems (urls, boards) and associated credentials also "TODO", "DOING" and "DONE" mapping (all columns)
+- List JIRA assignee mapping when status change, e.g. Change "In Progress" to "Code review" will change the assignee too.
 - List Slack workspaces and associated credentials
 - Google calendar credentials (to look for the time slots, to book the meeting)
 - Working hours (to schedule meetings on the right time, etc.)
@@ -16,6 +17,7 @@ TODO: Scripts, bots, other beauties to develop:
 - Issues with me as Assignee syncs to "Work" project from All JIRA projects I have set. 
 - Issues are divided into subprojects, according to columns in Jira (all projects merged, may be tagged with project name).
 - Issues are listed in the form of: \[{original estimate}\] {TASK-NUMBER} {Title (20 firstchars)} {link to the issue}.
+- If I move the issue to another subproject - issue's column is changing in JIRA too, assignee is changed by the mapping.
 - Script X pulls all issues from the desired JIRA columns (by default: "DOING": "In Progress", "Code review", configurable).
 - Fetches an Assignee and watchers of each task, retrieves  emails of each individual from JIRA. 
 - Merges the email addresses got from JIRA with "email aliases" set in the system, in case more exists.

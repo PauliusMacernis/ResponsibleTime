@@ -13,11 +13,13 @@ TODO: lists to make:
 
 TODO: Scripts, bots, other beauties to develop:
 - I use my personal Todoist ( https://todoist.com/ ) account to manage my work and life activities. It's the best.
+- (would it be better to have a simple TXT file on omputer, or Google sheets?)
 - I have a Project there called "Work" (configurable) I switch to that tab to manage my worktime-related activities.
 - Issues with me as Assignee syncs to "Work" project from All JIRA projects I have set. 
 - Issues are divided into subprojects, according to columns in Jira (all projects merged, may be tagged with project name).
 - Issues are listed in the form of: \[{original estimate}\] {TASK-NUMBER} {Title (20 firstchars)} {link to the issue}.
 - If I move the issue to another subproject - issue's column is changing in JIRA too, assignee is changed by the mapping.
+- I create the new ticket by writting something like: "AP> This is the task..." ("AP" stands for the project code, then txt)
 - There is one special subproject called "Mental stack".
 - If I move any issue to "Mental stack" it starts the Toggle clock on it.
 - It may be several tasks in the "Mental stack" (multitasking). Then toggl is ticking in 1 minute (config) chunks to each.

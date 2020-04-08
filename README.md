@@ -22,6 +22,7 @@ TODO: Scripts, bots, other beauties to develop:
 - If I move any issue to "Mental stack" it starts the Toggle clock on it.
 - It may be several tasks in the "Mental stack" (multitasking). Then toggl is ticking in 1 minute (config) chunks to each.
 - Order in the "Mental stack" matters. The higher is the task, the bigger time chunk (seconds) it logs to Toggl.
+- "Mental stack" list in th egiven order also goes to Slack as a personal status message.
 - You have to remove task from "Mental stack" when you finish your work. Otherwise, toggl will continue.
 - You will get the reminder to slack to release your "Mental stack" every 2 hours (config) (in case >1 issue there).
 - Script X pulls all issues from the desired JIRA columns (by default: "DOING": "In Progress", "Code review", configurable).

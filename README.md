@@ -1,15 +1,22 @@
 # Responsible time
 If you use Slack, Jira, Toggle, and you have a person to account to (e.g. PM or client) then this tool is for you.
 
+THE LIST IS ON ARCHITECTURING PHASE. THEREFORE IT MAY CHANGE A BIT. TRYING TO FIND THE BEST SOLUTION "ON THE PAPER" AT FIRST.
+
 TODO: lists to make:
-- List JIRA systems (urls, boards) and associated credentials
+- List JIRA systems (urls, boards) and associated credentials also "TODO", "DOING" and "DONE" mapping (all columns)
 - List Slack workspaces and associated credentials
 - Google calendar credentials (to look for the time slots, to book the meeting)
 - Working hours (to schedule meetings on the right time, etc.)
 - People list (email aliases, Slack info, etc.)
 
 TODO: Scripts, bots, other beauties to develop:
-- Script pulling all issues from the desired JIRA columns (by default: "In Progress", "Code review", configurable).
+- I use my personal Todoist ( https://todoist.com/ ) account to manage my work and life activities. It's the best.
+- I have a Project there called "Work" (configurable) I switch to that tab to manage my worktime-related activities.
+- Issues with me as Assignee syncs to "Work" project from All JIRA projects I have set. 
+- Issues are divided into subprojects, according to columns in Jira (all projects merged, may be tagged with project name).
+- Issues are listed in the form of: \[{original estimate}\] {TASK-NUMBER} {Title (20 firstchars)} {link to the issue}.
+- Script X pulls all issues from the desired JIRA columns (by default: "DOING": "In Progress", "Code review", configurable).
 - Fetches an Assignee and watchers of each task, retrieves  emails of each individual from JIRA. 
 - Merges the email addresses got from JIRA with "email aliases" set in the system, in case more exists.
 - The script finds the Assignee by email in Slack

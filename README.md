@@ -1,5 +1,5 @@
 # Responsible time
-If you use Slack, Jira, Toggle, and you have a person to account to (e.g. PM or client) then this tool is for you.
+If you use Slack, Jira, Toggle, Todoist and you have a person to account to (e.g. PM or client) then this tool is for you.
 
 THE LIST IS ON ARCHITECTURING PHASE. THEREFORE IT MAY CHANGE A BIT. TRYING TO FIND THE BEST SOLUTION "ON THE PAPER" AT FIRST.
 

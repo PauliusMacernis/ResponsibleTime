@@ -3,17 +3,10 @@ If you use Slack, Jira, Toggle, Todoist and you have a person to account to (e.g
 
 THE LIST IS ON ARCHITECTURING PHASE. THEREFORE IT MAY CHANGE A BIT. TRYING TO FIND THE BEST SOLUTION "ON THE PAPER" AT FIRST.
 
-TODO: lists to make:
-- List JIRA systems (urls, boards) and associated credentials also "TODO", "DOING" and "DONE" mapping (all columns)
-- List JIRA assignee mapping when status change, e.g. Change "In Progress" to "Code review" will change the assignee too.
-- List Slack workspaces and associated credentials
-- Google calendar credentials (to look for the time slots, to book the meeting)
-- Working hours (to schedule meetings on the right time, etc.)
-- People list (email aliases, Slack info, etc.)
 
 TODO: Scripts, bots, other beauties to develop:
 - I use my personal Todoist ( https://todoist.com/ ) account to manage my work and life activities. It's the best.
-- (would it be better to have a simple TXT file on omputer, or Google sheets?)
+- (would it be better to have a simple TXT file on computer, or Google sheets?)
 - I have a Project there called "Work" (configurable) I switch to that tab to manage my worktime-related activities.
 - Issues with me as Assignee syncs to "Work" project from All JIRA projects I have set. 
 - Issues are divided into subprojects, according to columns in Jira (all projects merged, may be tagged with project name).
@@ -24,7 +17,7 @@ TODO: Scripts, bots, other beauties to develop:
 - If I move any issue to "Mental stack" it starts the Toggle clock on it.
 - It may be several tasks in the "Mental stack" (multitasking). Then toggl is ticking in 1 minute (config) chunks to each.
 - Order in the "Mental stack" matters. The higher is the task, the bigger time chunk (seconds) it logs to Toggl.
-- "Mental stack" list in th egiven order also goes to Slack as a personal status message.
+- The ordered list of the "Mental stack" goes to Slack as a personal status message.
 - You have to remove task from "Mental stack" when you finish your work. Otherwise, toggl will continue.
 - You will get the reminder to slack to release your "Mental stack" every 2 hours (config) (in case >1 issue there).
 - Script X pulls all issues from the desired JIRA columns (by default: "DOING": "In Progress", "Code review", configurable).
@@ -43,3 +36,18 @@ TODO: Scripts, bots, other beauties to develop:
 - Another script syncs data from Toggle to Jira and adds the time spent according to the records in Toggl.
 - Statistics (story points / hour)
 - WH and other bonuses
+
+
+TODO: lists to make:
+- List JIRA systems (urls, boards) and associated credentials also "TODO", "DOING" and "DONE" mapping (all columns)
+- List JIRA assignee mapping when status change, e.g. Change "In Progress" to "Code review" will change the assignee too.
+- List Slack workspaces and associated credentials
+- Google calendar credentials (to look for the time slots, to book the meeting)
+- Working hours (to schedule meetings on the right time, etc.)
+- People list (email aliases, Slack info, etc.)
+
+
+# Run the project (Dev)
+
+- `docker-compose up --build`  
+- http://localhost:8088/index.php  

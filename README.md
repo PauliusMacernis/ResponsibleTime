@@ -11,6 +11,7 @@ TODO: Scripts, bots, other beauties to develop:
 - Issues with me as Assignee syncs to "Work" project from All JIRA projects I have set. 
 - Issues are divided into subprojects, according to columns in Jira (all projects merged, may be tagged with project name).
 - Issues are listed in the form of: \[{original estimate}\] {TASK-NUMBER} {Title (20 firstchars)} {link to the issue}.
+- \[{original estimate}\] part is the estimate of me, not others. Therefore I can estimate my tasks and this do not conflict.
 - If I move the issue to another subproject - issue's column is changing in JIRA too, assignee is changed by the mapping.
 - I create the new ticket by writting something like: "AP> This is the task..." ("AP" stands for the project code, then txt)
 - There is one special subproject called "Mental stack".

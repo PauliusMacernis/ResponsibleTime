@@ -26,6 +26,7 @@ TODO: Scripts, bots, other beauties to develop:
 - Merges the email addresses got from JIRA with "email aliases" set in the system, in case more exists.
 - The script finds the Assignee by email in Slack
 - The script sends Assignee the message to Slack "How many hours left to work on: {link to JIRA task}?"
+- The former question is sent only between 45 to 59 minutes of any hour. These are "prefered communication hours" matching law.
 - User responds by writing the number (float) to the new thread, in case more links are posted at once.
 - The number is being taken by the script and sent to the related JIRA issue to the "Time remaining" field to be updated.
 - Each JIRA task has it's evaluation in hours (so far in hours, "story points" field).

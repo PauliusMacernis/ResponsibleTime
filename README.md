@@ -6,7 +6,10 @@ THE LIST IS ON ARCHITECTURING PHASE. THEREFORE IT MAY CHANGE A BIT. TRYING TO FI
 
 TODO: Scripts, bots, other beauties to develop:
 - I use my personal Todoist ( https://todoist.com/ ) account to manage my work and life activities. It's the best.
-- (would it be better to have a simple TXT file on computer, or Google sheets?)
+  - Consider Todoist alternatives:
+      - TXT file on a computer (basic linux approach - minimum valuable increment, e.g. git works this way) 
+      - Google calendar (this actually is the best UI tool in my point of view, timeboxing, day planning, etc. matter.)
+      - Google sheets (may be easily done)
 - I have a Project there called "Work" (configurable) I switch to that tab to manage my worktime-related activities.
 - Issues with me as Assignee syncs to "Work" project from All JIRA projects I have set. 
 - Issues are divided into subprojects, according to columns in Jira (all projects merged, may be tagged with project name).

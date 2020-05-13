@@ -1,11 +1,11 @@
 # Responsible time
-If you use Slack, Jira, Toggle, Todoist and you have a person to account to (e.g. PM or client) then this tool is for you.
+If you use Slack (https://slack.com/), Jira (https://www.atlassian.com/software/jira), Toggl (https://toggl.com/), Float (https://www.float.com/), Todoist (https://todoist.com/) and you have a person to account to (e.g. PM or client) then this tool is for you.
 
 THE LIST IS ON ARCHITECTURING PHASE. THEREFORE IT MAY CHANGE A BIT. TRYING TO FIND THE BEST SOLUTION "ON THE PAPER" AT FIRST.
 
 
 TODO: Scripts, bots, other beauties to develop:
-- I use my personal Todoist ( https://todoist.com/ ) account to manage my work and life activities. It's the best.
+- I use my personal Todoist account to manage my work and life activities. It's the best: fast, easy, simple.
   - Consider Todoist alternatives:
       - TXT file on a computer (basic linux approach - minimum valuable increment, e.g. git works this way) 
       - Google calendar (this actually is the best UI tool in my point of view, timeboxing, day planning, etc. matter.)
@@ -39,6 +39,7 @@ TODO: Scripts, bots, other beauties to develop:
 - Then script looks at the Google calendar of both and books the meeting of 15 minutes in the closest working time possible
 - Then the script takes the google hangouts link and posts that to the slack for both together with the link to the issue
 - Another script syncs data from Toggle to Jira and adds the time spent according to the records in Toggl.
+- Adding extra callendar items or alternative (@todo: think) according to records in the Float system.
 - Statistics (story points / hour)
 - WH and other bonuses
 

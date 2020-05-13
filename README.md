@@ -40,6 +40,7 @@ TODO: Scripts, bots, other beauties to develop:
 - Then the script takes the google hangouts link and posts that to the slack for both together with the link to the issue
 - Another script syncs data from Toggle to Jira and adds the time spent according to the records in Toggl.
 - Adding extra callendar items or alternative (@todo: think) according to records in the Float system.
+- Post calendar event to JIRA ticket, e.g. as a comment with the info of the past event, e.g. description, time, etc.
 - Statistics (story points / hour)
 - WH and other bonuses
 

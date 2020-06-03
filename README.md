@@ -5,6 +5,12 @@ THE LIST IS ON ARCHITECTURING PHASE. THEREFORE IT MAY CHANGE A BIT. TRYING TO FI
 
 
 TODO: Scripts, bots, other beauties to develop:
+- Scan working processes for "task-alike" (e.g. "AP-number") patterns.
+- When the new pattern match detected - send info to Toggle saying "stop all what is going on, start this one".
+- Send "stop" to Toggle when a computer turns off, reboots, a user logs off.
+- Send "start on unknown" to Toggle when certain software (patterns) starts and the clock is not running yet.
+- Add "worked on unknown" time to the first "task-alike" time following.
+- Optional setting: Round up the today's Toggl time to 15 minutes (configurable) at 23:59 of each day.
 - I use my personal Todoist account to manage my work and life activities. It's the best: fast, easy, simple.
   - Consider Todoist alternatives:
       - TXT file on a computer (basic linux approach - minimum valuable increment, e.g. git works this way) 

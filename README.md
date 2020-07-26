@@ -48,6 +48,7 @@ TODO: Scripts, bots, other beauties to develop:
 - Adding extra callendar items or alternative (@todo: think) according to records in the Float system.
 - Post calendar event to JIRA ticket, e.g. as a comment with the info of the past event, e.g. description, time, etc.
 - Statistics (story points / hour)
+- Adding Comptia troubleshooting steps as subtasks to each bug-type task: https://www.comptia.org/content/guides/a-guide-to-network-troubleshooting
 - WH and other bonuses
 
 

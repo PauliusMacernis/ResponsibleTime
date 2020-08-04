@@ -49,6 +49,7 @@ TODO: Scripts, bots, other beauties to develop:
 - Post calendar event to JIRA ticket, e.g. as a comment with the info of the past event, e.g. description, time, etc.
 - Statistics (story points / hour)
 - Adding Comptia troubleshooting steps as subtasks to each bug-type task: https://www.comptia.org/content/guides/a-guide-to-network-troubleshooting
+- Track TODO items in the code of the project and use it in metrics too, e.g. to determine how TODO items impact hours/SP ratio.  
 - WH and other bonuses
 
 

@@ -21,7 +21,8 @@ TODO: Scripts, bots, other beauties to develop:
 - Issues are divided into subprojects, according to columns in Jira (all projects merged, may be tagged with project name).
 - Issues are listed in the form of: \[{original estimate}\] {TASK-NUMBER} {Title (20 firstchars)} {link to the issue}.
 - \[{original estimate}\] part is the estimate of me, not others. Therefore I can estimate my tasks and this do not conflict.
-- Setting the tag of "estimate" on JIRA ticket would send messages to the developers of the project asking for the story point value written back into the same thread. This is how \[{original estimate}\] appears.
+- Setting the tag of "estimate" on JIRA ticket would send messages to the developers of the project asking for the story point value written back into the same thread. This is how \[{original estimate}\] appears on request.
+- You may anytime give (but not change, this is important) the value of \[{original estimate}\] manually by editing the line in Todoist. 
 - If I move the issue to another subproject - issue's column is changing in JIRA too, assignee is changed by the mapping.
 - I create the new ticket by writting something like: "AP> This is the task..." ("AP" stands for the project code, then txt)
 - There is one special subproject called "Mental stack".

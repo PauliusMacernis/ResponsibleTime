@@ -60,6 +60,8 @@ TODO: Scripts, bots, other beauties to develop:
 - Adding Comptia troubleshooting steps as subtasks to each bug-type task: https://www.comptia.org/content/guides/a-guide-to-network-troubleshooting
 - Track TODO items in the code of the project and use it in metrics too, e.g. to determine how TODO items impact hours/SP ratio.  
 - Track vacation time collected. Send a private Slack message each time one more day counts in or out.
+- Count time zones in, work by traveling.
+- Multiuser support?
 - WH and other bonuses
 
 

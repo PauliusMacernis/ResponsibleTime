@@ -5,7 +5,14 @@ THE LIST IS ON ARCHITECTURING PHASE. THEREFORE IT MAY CHANGE A BIT. TRYING TO FI
 
 
 TODO: Scripts, bots, other beauties to develop:
-- Scan working processes for "task-alike" (e.g. "AP-number") patterns.
+- Scan working processes for "task-alike" (e.g. "AP-number") patterns.  
+  See: https://superuser.com/questions/382616/detecting-currently-active-window  
+  Explore: 
+  ```
+  for x in $(seq 1 10); do sleep 5; wmctrl -lp | grep $(xprop -root | \
+  grep _NET_ACTIVE_WINDOW | head -1 | awk '{print $5}' | sed 's/,//' | \
+  sed 's/^0x/0x0/'); done
+  ```
 - When the new pattern match detected - send info to Toggle saying "stop all what is going on, start this one".
 - Send "stop" to Toggle when a computer turns off, reboots, a user logs off.
 - Send "start on unknown" to Toggle when certain software (patterns) starts and the clock is not running yet.

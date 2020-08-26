@@ -11,6 +11,8 @@ do
 
   ACTIVITY_RECORD_FILE=$DIR_FOR_ACTIVITY_RECORDS/"$DATE_FOR_FILENAME.txt"
 
+  # See: https://superuser.com/questions/382616/detecting-currently-active-window (the script)
+  # See: https://unix.stackexchange.com/questions/85244/setting-display-in-systemd-service-file (the way to launch it)
   ACTIVITY_RECORD_TITLE=$(wmctrl -lp | \
     grep "$(xprop -root | \
       grep _NET_ACTIVE_WINDOW | \

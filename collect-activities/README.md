@@ -50,3 +50,9 @@ Activity records are stored inside the files of the `activities` dir.
 Each filename represents a day when activity happened therefore all activities are grouped in such way.  
 The content of each file is ordered by the time from the earliest to the latest 
 therefore reading a file from the top to the bottom will tell the story on how activities happened over the time of a day. 
+
+
+# Some more commands you may find useful
+
+`systemctl --user daemon-reload` - to reload the daemon after any changes
+`systemctl --user restart responsible-time-collect-activities.service` - to restart the script after any changes

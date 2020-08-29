@@ -5,6 +5,7 @@ DIR_FOR_ACTIVITY_RECORDS=$1
 while true
 do
 
+  # See: datetime format in compress-activities/src/Settings.php - must be the same
   DATE_FOR_FILENAME=$(date '+%Y-%m-%d');
   # ISO8601 UTC timestamp + ms
   DATE_FOR_A_RECORD=$(date --utc +%FT%T.%3NZ);
@@ -21,7 +22,7 @@ do
       sed 's/,//' | \
       sed 's/^0x/0x0/')")
 
-  echo "$DATE_FOR_A_RECORD" : "$ACTIVITY_RECORD_TITLE" >> "$ACTIVITY_RECORD_FILE"
+  echo "$DATE_FOR_A_RECORD"  "$ACTIVITY_RECORD_TITLE" >> "$ACTIVITY_RECORD_FILE"
 
   sleep 1
 

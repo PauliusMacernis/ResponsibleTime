@@ -13,6 +13,10 @@ TODO: Scripts, bots, other beauties to develop:
   grep _NET_ACTIVE_WINDOW | head -1 | awk '{print $5}' | sed 's/,//' | \
   sed 's/^0x/0x0/'); done
   ```
+  - Catch when the screen is locked
+  - Catch when no activity (no keyboard click, no mouse click, no mouse pointer move) 
+  - Determine patterns for: "work-related activity starts", "private-related activity starts". The default is "continue", if the first record - "private-related activity starts".
+- --The content down bellow is under the architecture question--
 - When the new pattern match detected - send info to Toggle saying "stop all what is going on, start this one".
 - Send "stop" to Toggle when a computer turns off, reboots, a user logs off.
 - Send "start on unknown" to Toggle when certain software (patterns) starts and the clock is not running yet.
@@ -61,7 +65,8 @@ TODO: Scripts, bots, other beauties to develop:
 - Track TODO items in the code of the project and use it in metrics too, e.g. to determine how TODO items impact hours/SP ratio.  
 - Track vacation time collected. Send a private Slack message each time one more day counts in or out.
 - Count time zones in, work by traveling.
-- Multiuser support?
+- Multiuser support on one machine?
+- Collect "TODO" out of each project and make it count as "technical debt & investment" impacts the estimation, health, etc.
 - WH and other bonuses
 
 

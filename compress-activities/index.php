@@ -3,110 +3,91 @@ declare(strict_types=1);
 
 require_once('vendor/autoload.php');
 
-use Activity\ActivityRecord\ActivityRecord;
-use Activity\ActivityRecord\ActivityRecordOnPowerOff;
+use Activity\ActivityRecordAndSprintReset\ActivityRecordAndSprintReset;
+use Activity\ActivityRecordWithDuration\ActivityRecordWithDuration;
+use Activity\ActivitySprintWithDuration\ActivitySprintWithDuration;
+use Activity\ActivitySprintWithDurationRegistry\ActivitySprintWithDurationRegistry;
+use Activity\Decision\IsSameActivity;
 use Activity\Duration;
 use Activity\Records\Records;
 use Activity\Settings;
 
 $fileToRead = '/home/paulius/.responsible-time/activities/2020-08-28 (copy).txt';
+//$fileToRead = '/home/paulius/.responsible-time/activities/2020-08-28-min.txt';
 $fileToWrite = $fileToRead . '.unique';
 
 $records = new Records($fileToRead);
-$activityRecordPrevious = null;
-$durationBetweenPrevAndThisActivityRecord = null;
+$sprintRegistry = new ActivitySprintWithDurationRegistry();
 
+$isFirstActivityRecord = true;
 foreach ($records as $activityRecord) {
 
-    if (null === $activityRecordPrevious) { // First record
-        $durationBetweenPrevAndThisActivityRecord = new Duration($activityRecord->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP), $activityRecord->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP));
-    } else {
-        $durationBetweenPrevAndThisActivityRecord = new Duration($activityRecordPrevious->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP), $activityRecord->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP));
+    // First record
+    // First record is always incomplete as we need data on the second activity to determine how long the first activity took
+    // Therefore the first record always gets "default max duration" (which should be adjusted in case duration is treated to be completed ?? !!!!!!! )
+    // --- ACTIVITY DECISIONS ---
+    $reset = new ActivityRecordAndSprintReset($activityRecord);
+    if (true === $isFirstActivityRecord) {
+        $activityRecordWithDuration = $reset->getActivityRecordWithDuration();
+        $activitySprintWithDuration = $reset->getActivitySprintWithDuration();
+    } else { // Any other line but the first one
+        // We know the next item so we adjust the duration of the previous activity (& so the sprint too!) to be up to the start of the current activity.
+        $activityRecordWithDuration = new ActivityRecordWithDuration(
+            $activityRecordWithDuration->getActivityRecord(),
+            new Duration(
+                $activityRecordWithDuration->getActivityRecordDuration()->getTimeStart()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP),
+                $reset->getActivityRecordWithDuration()->getActivityRecordDuration()->getTimeEnd()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP)
+            )
+        );
+
+        //var_dump($reset->getActivityRecordWithDuration()->getActivityRecordDuration(), $activityRecord); die();
+
+        $activitySprintWithDuration = new ActivitySprintWithDuration(
+            $activitySprintWithDuration->getActivityRecordThatStartedSprint(),
+            new Duration(
+                $activitySprintWithDuration->getActivityRecordThatStartedSprint()->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP),
+                $reset->getActivityRecordWithDuration()->getActivityRecordDuration()->getTimeEnd()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP) //// @TODO: Plus MAX
+            )
+        );
     }
 
+    // --- ACTIVITY SPRINT DECISIONS ---
+    $isSameActivity = (new IsSameActivity($activitySprintWithDuration, $activityRecord))->isSameActivity();
 
-    $activityRecordPrevious = $activityRecord;
+    // In case it is the same type of activity, we add up the time so at the end we have duration: FROM first activity of the type (start) TO this activity start+max activity duration possible (end).
+    if (true === $isSameActivity) {
+        $activitySprintWithDuration = new ActivitySprintWithDuration(
+            $activitySprintWithDuration->getActivityRecordThatStartedSprint(),
+            new Duration(
+                $activitySprintWithDuration->getActivityRecordThatStartedSprint()->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP),
+                $reset->getActivityRecordWithDuration()->getActivityRecordDuration()->getTimeEnd()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP)
+            )
+        );
+    }
+
+    // In case this is the activity starting the new sprint
+    if (false === $isSameActivity) {
+        $activitySprintWithDuration = new ActivitySprintWithDuration(
+            $activitySprintWithDuration->getActivityRecordThatStartedSprint(),
+            new Duration(
+                $activitySprintWithDuration->getActivityRecordThatStartedSprint()->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP),
+                $activityRecord->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP)
+            )
+        );
+
+        // Register the completed as it is fully done now
+        $sprintRegistry->add($activitySprintWithDuration);
+
+        // Reset activity sprint to the new one -- same as in
+        $reset = new ActivityRecordAndSprintReset($activityRecord);
+        $activityRecordWithDuration = $reset->getActivityRecordWithDuration();
+        $activitySprintWithDuration = $reset->getActivitySprintWithDuration();
+    }
+
+    // End
+    $isFirstActivityRecord = false;
 }
 
-//
-//die();
-//
-//$outputToFile = new OutputToFile();
-//
-//$file = new SplFileObject($fileToRead);
-//
-//$countRecords = 0;
-//$countRecordsUnique = 0;
-//$countRecordsInactivity = 0;
-//$countRecordsOnPowerOff = 0;
-//
-//$recordsOnPowerOff = [];
-//
-//$dateTimeOfActivityStart = null;
-//$lastRecordDateTimeExcluded = null;
-//
-//// -- Registry
-//// Activity record
-//$activityRecordPrevious = null;
-//$activityRecord = null;
-//$durationBetweenPrevAndThisActivityRecord = null;
-//// Activity
-//$activityPrevious = null;
-//$activity = null;
-//
-//
-//while ($lineFromFile = $file->fgets()) {
-//    ++$countRecords;
-//
-//    $activityRecord = new ActivityRecord($lineFromFile);
-//    $activity = $activityRecord;
-//
-//    if (null === $activityRecordPrevious) { // First record
-//
-//        $durationBetweenPrevAndThisActivityRecord = new Duration($activityRecord->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP), $activityRecord->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP));
-//
-//        $outputToFile->outputActivityRecord($activityRecord, $fileToWrite);
-//        ++$countRecordsUnique;
-//        $dateTimeOfActivityStart = $activityRecord->getDateTime();
-//        $lastRecordDateTimeExcluded = $activityRecord->getRecordFollowingDateTime();
-//
-//    } else { // Later record (any after the first one)
-//        // Intermediate activity record needed? For example, power outage, power off,
-//        // too long on the same application (probably not near by the computer anymore, - check webcam + AI? :D), etc.
-//        $durationBetweenPrevAndThisActivityRecord = new Duration($activityRecordPrevious->getDateTime(), $activityRecord->getDateTime());
-//
-//        if ($durationBetweenPrevAndThisActivityRecord->getDurationInSeconds() > Settings::MAX_ACTIVITY_RECORD_TIME_IN_SECONDS) {
-//            // Append extra "Power off" activity (actually, inactivity) after Settings::MAX_ACTIVITY_RECORD_TIME_IN_SECONDS has passed since the last activity started
-//            $outputToFile->outputActivityRecord(new ActivityRecordOnPowerOff($activityRecord), $fileToWrite);
-//            ++$countRecordsOnPowerOff;
-//        }
-//    }
-//
-//    if (null !== $activityRecordPrevious && $lastRecordDateTimeExcluded !== $activityRecord->getRecordFollowingDateTime()) {
-//        $outputToFile->outputActivityRecord($activityRecord, $fileToWrite);
-//        ++$countRecordsUnique;
-//        $dateTimeOfActivityStart = $activityRecord->getDateTime();
-//        $lastRecordDateTimeExcluded = $activityRecord->getRecordFollowingDateTime();
-//        $activityPrevious = $activityRecord;
-//    }
-//
-////    var_dump($durationFromPrevToThisRecord, $durationFromPrevToThisRecord->getDurationInSeconds());
-////    if ($countRecords === 15) die;
-//
-//    if (false === $activityRecord->isUserActivity()) {
-//        ++$countRecordsInactivity;
-//    }
-//
-//
-//    $activityRecordPrevious = $activityRecord;
-//    unset($activityRecord);
-//}
-//
-//$file = null;
-//
-//
-//echo "\n" . sprintf('Records in total: %s', $countRecords);
-//echo "\n" . sprintf('Inactivity records: %s, or %s percents of total', $countRecordsInactivity, round($countRecordsInactivity * 100 / $countRecords));
-//echo "\n" . sprintf('Power off records generated: %s, or %s percents of total', $countRecordsOnPowerOff, round($countRecordsOnPowerOff * 100 / $countRecords));
-//echo "\n" . sprintf('Unique activity records: %s, or %s percents of total', $countRecordsUnique, round($countRecordsUnique * 100 / $countRecords));
-//echo "\n";
+if (isset($activitySprintWithDuration)) {
+    $sprintRegistry->add($activitySprintWithDuration);
+}

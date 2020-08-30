@@ -20,4 +20,14 @@ class Duration
     {
         return $this->timeEnd->getTimestamp() - $this->timeStart->getTimestamp();
     }
+
+    public function getTimeStart(): DateTime
+    {
+        return $this->timeStart;
+    }
+
+    public function getTimeEnd(): DateTime
+    {
+        return $this->timeEnd;
+    }
 }

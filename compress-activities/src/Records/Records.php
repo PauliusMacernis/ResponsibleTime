@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
 
+// Guru says:
 // Patterns (architecture, naming, etc.) in the software are discovered after the practice interrupted by observation, not created. Therefore class names changes over the time.
 // More monitors around you is better for your neck muscles, nerves, etc.
+
 namespace Activity\Records;
 
 use Activity\ActivityRecord\ActivityRecord;
@@ -28,7 +30,7 @@ class Records implements Iterator
     public function next(): void
     {
         ++$this->key;
-        if(false === $this->file->eof()) {
+        if (false === $this->file->eof()) {
             $this->valueRaw = $this->file->fgets();
         } else {
             $this->valueRaw = null;
@@ -44,8 +46,7 @@ class Records implements Iterator
     public function valid(): bool
     {
         return
-            null !== $this->valueRaw
-        ;
+            null !== $this->valueRaw;
     }
 
     public function rewind(): void

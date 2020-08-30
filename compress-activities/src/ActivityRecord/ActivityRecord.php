@@ -56,18 +56,18 @@ final class ActivityRecord extends ActivityRecordAbstract
             $this->wmClass = new WmClass('');
             $this->clientMachine = new ClientMachine('');
             $this->windowTitle = new WindowTitle(
-                $patternMatches['window_id'][0] ?? ''
-                . $patternMatches['desktop_id'][0] ?? ''
-                . $patternMatches['PID'][0] ?? ''
-                . $patternMatches['WM_CLASS'][0] ?? ''
-                . $patternMatches['client_machine'][0] ?? ''
-                . $patternMatches['window_title'][0] ?? ''
+                ($patternMatches['window_id'][0] ?? '')
+                . ($patternMatches['desktop_id'][0] ?? '')
+                . ($patternMatches['PID'][0] ?? '')
+                . ($patternMatches['WM_CLASS'][0] ?? '')
+                . ($patternMatches['client_machine'][0] ?? '')
+                . ($patternMatches['window_title'][0] ?? '')
             );
 
             return;
         }
 
-        var_dump($patternMatches);
+        // var_dump($patternMatches);
 
         // Set of values in activity case
         $this->dateTime = new DateTime($patternMatches['datetime'][0]);

@@ -18,4 +18,9 @@ abstract class ActivityRecordPart
     {
         $this->data = trim($partOfTheFileLineMatchingPattern);
     }
+
+    public function __toString(): string
+    {
+        return $this->data;
+    }
 }

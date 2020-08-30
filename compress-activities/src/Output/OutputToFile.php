@@ -7,7 +7,7 @@ class OutputToFile
 {
     public function outputActivityRecord(ActivityRecordinterface $record, string $pathToFile): void
     {
-        if($record->isUserActivity()) {
+        if ($record->isUserActivity()) {
             $lineToWrite = sprintf("%s: %s\n", $record->getDateTime(), $record->getRecordFollowingDateTimeTrimmed());
         } else {
             $lineToWrite = sprintf("%s: INACTIVITY: %s\n", $record->getDateTime(), $record->getRecordFollowingDateTimeTrimmed());

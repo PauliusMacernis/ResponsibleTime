@@ -12,6 +12,7 @@ class Settings
      * However, sometimes the computer goes down due to known or unknown reason (e.g. power outage)
      * then the next activity will be recorded after some time.
      *
+     * @TODO:
      * This setting tells how long we "wait" for another activity record to appear before we treat the activity suspended (inactivity started).
      *
      * For example, if the first record was at 00:00:05 and the next one is at 08:00:05
@@ -34,6 +35,5 @@ class Settings
     public const RECORD_DATETIME_FORMAT_FOR_PHP = "Y-m-d\TH:i:s.v\Z";
 
     public const RECORD_MESSAGE_ON_POWER_OFF = "POWER IS OFF";
-
 
 }

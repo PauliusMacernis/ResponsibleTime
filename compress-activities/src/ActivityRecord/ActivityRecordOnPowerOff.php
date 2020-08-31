@@ -11,17 +11,14 @@ use Activity\ActivityRecordPart\WindowId;
 use Activity\ActivityRecordPart\WindowTitle;
 use Activity\ActivityRecordPart\WmClass;
 use Activity\Settings;
-use DateInterval;
+use DateTimeInterface;
 
 
 class ActivityRecordOnPowerOff extends ActivityRecordAbstract
 {
-    public function __construct(ActivityRecord $record)
+    public function __construct(DateTimeInterface $dateTimeStart)
     {
-        $previousRecordStart = new \DateTime($record->getDateTime());
-        $previousRecordStart->add(new DateInterval('PT' . Settings::MAX_ACTIVITY_RECORD_TIME_IN_SECONDS . 'S'));
-
-        $this->dateTime = new DateTime($previousRecordStart->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP));
+        $this->dateTime = new DateTime($dateTimeStart->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP));
         $this->windowId = new WindowId('');
         $this->desktopId = new DesktopId('');
         $this->pid = new Pid('');

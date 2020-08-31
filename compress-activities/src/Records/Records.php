@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace Activity\Records;
 
 use Activity\ActivityRecord\ActivityRecord;
+use Activity\ActivityRecord\ActivityRecordInterface;
 use Iterator;
 use SplFileObject;
 
@@ -22,7 +23,7 @@ class Records implements Iterator
         $this->file = new SplFileObject($fileToRead);
     }
 
-    public function current(): ActivityRecord
+    public function current(): ActivityRecordInterface
     {
         return new ActivityRecord($this->valueRaw, $this->getLineNumber());
     }

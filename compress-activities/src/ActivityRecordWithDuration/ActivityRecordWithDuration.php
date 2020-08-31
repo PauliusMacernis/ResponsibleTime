@@ -10,8 +10,9 @@ use Activity\Settings;
 class ActivityRecordWithDuration
 {
     /** @var ActivityRecordInterface */
-    private $activityRecord;
-    private $activityRecordDuration;
+    protected $activityRecord;
+    /** @var Duration */
+    protected $activityRecordDuration;
 
     public function __construct(ActivityRecordInterface $activityRecord, Duration $duration)
     {

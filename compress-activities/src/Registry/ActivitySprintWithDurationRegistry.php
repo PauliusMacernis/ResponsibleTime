@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Activity\ActivitySprintWithDurationRegistry;
+namespace Activity\Registry;
 
 use Activity\ActivitySprintWithDuration\ActivitySprintWithDuration;
-use Activity\Settings;
 
 /**
  * Whatever we do with the found sprints...
@@ -17,9 +16,9 @@ class ActivitySprintWithDurationRegistry
         echo
             "\n"
             . '['
-            . $activitySprintWithDuration->getActivitySprintDuration()->getTimeStart()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP)
+            . $activitySprintWithDuration->getActivitySprintDuration()->getDateTimeStartFormatted()
             . ' - '
-            . $activitySprintWithDuration->getActivitySprintDuration()->getTimeEnd()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP)
+            . $activitySprintWithDuration->getActivitySprintDuration()->getDateTimeEndFormatted()
             . '] '
             . "\n"
             . $activitySprintWithDuration->getActivityRecordThatStartedSprint()->getWmClass()->__toString()

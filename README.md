@@ -1,8 +1,18 @@
 # Responsible time
-If you use Slack (https://slack.com/), Jira (https://www.atlassian.com/software/jira), Toggl (https://toggl.com/), Float (https://www.float.com/), Todoist (https://todoist.com/) and you have a person to account to (e.g. PM or client) then this tool is for you.
+If you use Slack (https://slack.com/), Jira (https://www.atlassian.com/software/jira), Toggl (https://toggl.com/), Float (https://www.float.com/), Todoist (https://todoist.com/) and you have a person to account to (e.g. PM or client) then this tool is for you.  
+If you just want to track your own activities on the computer over the day - this tool is also for you.
 
-THE LIST IS ON ARCHITECTURING PHASE. THEREFORE IT MAY CHANGE A BIT. TRYING TO FIND THE BEST SOLUTION "ON THE PAPER" AT FIRST.
 
+## What's done
+
+- *For Ubuntu 20.04 users only:* Scan daily activities, write records to the log file. See `collect-activities`
+- *For Ubuntu 20.04 users only:* Inactivity not always properly detected (e.g. locking the screen) therefore minimizing all the Windows (`Super` + `D`) before is a workaround.
+- *For Ubuntu 20.04 users only:* Some more advanced cases not tested, e.g.: multiple users, multiple working spaces, hibernate, etc. 
+- Activities may "compress" into "activity sprints" which is same activity repeatedly recorded for seconds, minutes, etc. See `compress-activities`
+- First activity starting 00:00:00 and lasting up to the real first activity in the daily record log is added as "inactivity" in case the first activity in the log does not start at that exact time.
+
+
+## INITIAL TODO LIST. THE LIST IS ON ARCHITECTURING PHASE. THEREFORE IT MAY CHANGE A BIT. TRYING TO FIND THE BEST SOLUTION "ON THE PAPER" AT FIRST.
 
 TODO: Scripts, bots, other beauties to develop:
 - Scan working processes for "task-alike" (e.g. "AP-number") patterns.  

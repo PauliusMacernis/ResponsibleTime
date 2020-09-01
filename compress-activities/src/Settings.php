@@ -33,7 +33,14 @@ class Settings
      * Defines time format of the record in the initial text-log file.
      */
     public const RECORD_DATETIME_FORMAT_FOR_PHP = "Y-m-d\TH:i:s.v\Z";
+    public const RECORD_DATETIME_TIMEZONE_FOR_PHP = "Z";
+    /**
+     * @var string These are the files in where records are stored. The format matches the ones in PHP datetime.
+     * @TODO: DRY: See shell scripts collecting records to this file
+     */
+    public const FILENAME_DATETIME_FORMAT_FOR_RECORDS = "Y-m-d";
 
-    public const RECORD_MESSAGE_ON_POWER_OFF = "POWER IS OFF";
-
+    /** Meanings assigned to the detected inactivity/power off activity */
+    public const POWER_OFF_ACTIVITY_RECORD_WM_CLASS = "INACTIVITY";
+    public const POWER_OFF_ACTIVITY_RECORD_WINDOW_TITLE = "POWER IS OFF";
 }

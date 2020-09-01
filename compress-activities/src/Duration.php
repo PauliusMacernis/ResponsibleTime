@@ -3,31 +3,41 @@ declare(strict_types=1);
 
 namespace Activity;
 
-use DateTime;
+use DateTimeInterface;
 
 class Duration
 {
-    private $timeStart;
-    private $timeEnd;
+    private $dateTimeStart;
+    private $dateTimeEnd;
 
-    public function __construct(string $timeStartString, string $timeEndString)
+    public function __construct(DateTimeInterface $dateTimeStart, DateTimeInterface $dateTimeEnd)
     {
-        $this->timeStart = new DateTime($timeStartString);
-        $this->timeEnd = new DateTime($timeEndString);
+        $this->dateTimeStart = $dateTimeStart;
+        $this->dateTimeEnd = $dateTimeEnd;
     }
 
     public function getDurationInSeconds(): int
     {
-        return $this->timeEnd->getTimestamp() - $this->timeStart->getTimestamp();
+        return $this->dateTimeEnd->getTimestamp() - $this->dateTimeStart->getTimestamp();
     }
 
-    public function getTimeStart(): DateTime
+    public function getDateTimeEnd(): DateTimeInterface
     {
-        return $this->timeStart;
+        return $this->dateTimeEnd;
     }
 
-    public function getTimeEnd(): DateTime
+    public function getDateTimeStartFormatted(): string
     {
-        return $this->timeEnd;
+        return $this->getFormattedDateTime($this->dateTimeStart);
+    }
+
+    public function getDateTimeEndFormatted(): string
+    {
+        return $this->getFormattedDateTime($this->dateTimeEnd);
+    }
+
+    private function getFormattedDateTime(DateTimeInterface $dateTime): string
+    {
+        return $dateTime->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP);
     }
 }

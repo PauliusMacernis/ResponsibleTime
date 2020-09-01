@@ -6,8 +6,8 @@ namespace Activity;
 use Activity\ActivityRecord\ActivityRecordInterface;
 use Activity\ActivityRecordAndSprintReset\ActivityRecordAndSprintReset;
 use Activity\ActivitySprintWithDuration\ActivitySprintWithDuration;
-use Activity\ActivitySprintWithDurationRegistry\ActivitySprintWithDurationRegistry;
 use Activity\Decision\IsSameActivity;
+use Activity\Registry\ActivitySprintWithDurationRegistry;
 
 class ActivityRecordConversionToActivitySprint
 {

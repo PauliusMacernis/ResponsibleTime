@@ -20,6 +20,7 @@ final class ActivityRecord extends ActivityRecordAbstract
 
     public function __construct(string $recordLineFromFile, int $sourceFileLineOriginalNumber)
     {
+        $this->rawRecordFromFile = $recordLineFromFile;
         $result = preg_match_all(self::PATTERN, $recordLineFromFile, $patternMatches);
 
         if (false === $result) {
@@ -66,8 +67,6 @@ final class ActivityRecord extends ActivityRecordAbstract
 
             return;
         }
-
-        // var_dump($patternMatches);
 
         // Set of values in activity case
         $this->dateTime = new DateTime($patternMatches['datetime'][0]);

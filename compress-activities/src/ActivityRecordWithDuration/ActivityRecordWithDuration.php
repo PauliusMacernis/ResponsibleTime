@@ -5,7 +5,6 @@ namespace Activity\ActivityRecordWithDuration;
 
 use Activity\ActivityRecord\ActivityRecordInterface;
 use Activity\Duration;
-use Activity\Settings;
 
 class ActivityRecordWithDuration
 {
@@ -18,8 +17,8 @@ class ActivityRecordWithDuration
     {
         $this->activityRecord = $activityRecord;
         $this->activityRecordDuration = new Duration(
-            $activityRecord->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP),
-            $duration->getTimeEnd()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP)
+            $activityRecord->getDateTime(),
+            $duration->getDateTimeEnd()
         );
     }
 

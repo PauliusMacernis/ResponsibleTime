@@ -4,16 +4,19 @@ declare(strict_types=1);
 namespace Activity\ActivityRecord;
 
 use Activity\ActivityRecordPart\ClientMachine;
-use Activity\ActivityRecordPart\DateTime;
 use Activity\ActivityRecordPart\DesktopId;
 use Activity\ActivityRecordPart\Pid;
 use Activity\ActivityRecordPart\WindowId;
 use Activity\ActivityRecordPart\WindowTitle;
 use Activity\ActivityRecordPart\WmClass;
+use DateTimeInterface;
 
 abstract class ActivityRecordAbstract implements ActivityRecordInterface
 {
-    /** @var DateTime */
+    /** @var string */
+    protected $rawRecordFromFile;
+
+    /** @var DateTimeInterface */
     protected $dateTime;
 
     /** @var WindowId */
@@ -35,7 +38,7 @@ abstract class ActivityRecordAbstract implements ActivityRecordInterface
     protected $windowTitle;
 
 
-    public function getDateTime(): DateTime
+    public function getDateTime(): DateTimeInterface
     {
         return $this->dateTime;
     }
@@ -68,6 +71,11 @@ abstract class ActivityRecordAbstract implements ActivityRecordInterface
     public function getWindowTitle(): WindowTitle
     {
         return $this->windowTitle;
+    }
+
+    public function __toString()
+    {
+        return $this->rawRecordFromFile;
     }
 
     abstract public function isUserActivity(): bool;

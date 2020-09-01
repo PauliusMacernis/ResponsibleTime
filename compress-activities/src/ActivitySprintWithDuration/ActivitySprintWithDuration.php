@@ -6,7 +6,6 @@ namespace Activity\ActivitySprintWithDuration;
 use Activity\ActivityRecord\ActivityRecordInterface;
 use Activity\ActivityRecordWithDuration\ActivityRecordWithDuration;
 use Activity\Duration;
-use Activity\Settings;
 use RuntimeException;
 
 class ActivitySprintWithDuration
@@ -26,34 +25,21 @@ class ActivitySprintWithDuration
      */
     private $activitySprintDuration;
 
+    /** @var ActivityRecordWithDuration */
+    private $lastActivityRecordWithDurationUpToDate;
+
     public function __construct(ActivityRecordInterface $activityRecordThatStartsSprint, ?ActivityRecordWithDuration $activityRecordThatCompletedSprintWithArtificialDateTime, ?ActivityRecordInterface $upcomingAnotherSprintFirstActivity)
     {
-        if (null === $activityRecordThatCompletedSprintWithArtificialDateTime && null === $upcomingAnotherSprintFirstActivity) {
-            throw new RuntimeException('Activity sprint MUST RECEIVE the most recent activity of the same sprint OR the first activity of the new sprint WHEN constructing the object.');
-        }
-
         $this->activityRecordThatStartedSprint = $activityRecordThatStartsSprint;
         $this->activityRecordThatCompletedSprintWithArtificialDateTime = $activityRecordThatCompletedSprintWithArtificialDateTime;
         $this->upcomingAnotherSprintFirstActivity = $upcomingAnotherSprintFirstActivity;
-
-        $dateTimeStart = $activityRecordThatStartsSprint->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP); // @TODO: Drop format ? By moving it to the farrest place possible..
-        if (null === $upcomingAnotherSprintFirstActivity) {
-            $dateTimeEnd = $activityRecordThatCompletedSprintWithArtificialDateTime->getActivityRecordDuration()->getTimeEnd()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP);
-        } else {
-            $dateTimeEnd = $upcomingAnotherSprintFirstActivity->getDateTime()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP);
-        }
-
-        $this->activitySprintDuration = new Duration($dateTimeStart, $dateTimeEnd);
+        $this->setActivitySprintDuration($activityRecordThatStartsSprint, $upcomingAnotherSprintFirstActivity, $activityRecordThatCompletedSprintWithArtificialDateTime);
+        $this->setLastActivityRecordWithDurationUpToDate($activityRecordThatCompletedSprintWithArtificialDateTime, $upcomingAnotherSprintFirstActivity);
     }
 
     public function getActivityRecordThatStartedSprint(): ActivityRecordInterface
     {
         return $this->activityRecordThatStartedSprint;
-    }
-
-    public function getActivitySprintDuration(): Duration
-    {
-        return $this->activitySprintDuration;
     }
 
     public function getActivityRecordThatCompletedSprintWithArtificialDateTime(): ?ActivityRecordWithDuration
@@ -64,5 +50,46 @@ class ActivitySprintWithDuration
     public function getUpcomingAnotherSprintFirstActivity(): ?ActivityRecordInterface
     {
         return $this->upcomingAnotherSprintFirstActivity;
+    }
+
+    public function getActivitySprintDuration(): Duration
+    {
+        return $this->activitySprintDuration;
+    }
+
+    public function getLastActivityRecordWithDurationUpToDate(): ActivityRecordWithDuration
+    {
+        return $this->lastActivityRecordWithDurationUpToDate;
+    }
+
+    private function setActivitySprintDuration(ActivityRecordInterface $activityRecordThatStartsSprint, ?ActivityRecordInterface $upcomingAnotherSprintFirstActivity, ?ActivityRecordWithDuration $activityRecordThatCompletedSprintWithArtificialDateTime): void
+    {
+        if (null === $activityRecordThatCompletedSprintWithArtificialDateTime && null === $upcomingAnotherSprintFirstActivity) {
+            throw new RuntimeException('Activity sprint MUST RECEIVE the most recent activity of the same sprint OR the first activity of the new sprint WHEN constructing the object with activity SPRINT duration.');
+        }
+
+        $dateTimeStart = $activityRecordThatStartsSprint->getDateTime();
+        if (null === $upcomingAnotherSprintFirstActivity) {
+            $dateTimeEnd = $activityRecordThatCompletedSprintWithArtificialDateTime->getActivityRecordDuration()->getDateTimeEnd();
+        } else {
+            $dateTimeEnd = $upcomingAnotherSprintFirstActivity->getDateTime();
+        }
+
+        $this->activitySprintDuration = new Duration($dateTimeStart, $dateTimeEnd);
+    }
+
+    private function setLastActivityRecordWithDurationUpToDate(?ActivityRecordWithDuration $activityRecordThatCompletedSprintWithArtificialDateTime, ?ActivityRecordInterface $upcomingAnotherSprintFirstActivity): void
+    {
+        if (null === $activityRecordThatCompletedSprintWithArtificialDateTime && null === $upcomingAnotherSprintFirstActivity) {
+            throw new RuntimeException('Activity sprint MUST RECEIVE the most recent activity of the same sprint OR the first activity of the new sprint WHEN constructing the object with activity RECORD duration.');
+        }
+
+        $dateTimeStart = $activityRecordThatCompletedSprintWithArtificialDateTime->getActivityRecord()->getDateTime();
+        if (null === $this->upcomingAnotherSprintFirstActivity) {
+            $dateTimeEnd = $activityRecordThatCompletedSprintWithArtificialDateTime->getActivityRecordDuration()->getDateTimeEnd();
+        } else {
+            $dateTimeEnd = $upcomingAnotherSprintFirstActivity->getDateTime();
+        }
+        $this->lastActivityRecordWithDurationUpToDate = new ActivityRecordWithDuration($activityRecordThatCompletedSprintWithArtificialDateTime->getActivityRecord(), new Duration($dateTimeStart, $dateTimeEnd));
     }
 }

@@ -11,11 +11,12 @@ If you just want to track your own activities on the computer over the day - thi
 - Activities may "compress" into "activity sprints" which is same activity repeatedly recorded for seconds, minutes, etc. See `compress-activities`
 - First activity starting 00:00:00 and lasting up to the real first activity in the daily record log is added as "inactivity" in case the first activity in the log is far away from the early midnight
 - First activity starting 00:00:00 and lasting up to the real first activity in the daily record log is added as extended up to exact midnight (00:00:00) in case the first activity in the log is very close to the early midnight
+- End time adjustment to 23:59:59 in the similar way the start time has been adjusted to 00:00:00.
 
 
 ## Next
 
-- End time adjustments in the similar way the start time has been adjusted.
+- Refactoring
 
 
 ## The Vision

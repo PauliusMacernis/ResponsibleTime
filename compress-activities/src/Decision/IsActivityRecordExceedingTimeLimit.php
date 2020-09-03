@@ -7,7 +7,7 @@ use Activity\ActivityRecord\ActivityRecordInterface;
 use Activity\ActivityRecordAndSprintReset\ActivityRecordAndSprintReset;
 use Activity\ActivityRecordWithDuration\ActivityRecordOnPowerOffWithDuration;
 use Activity\ActivityRecordWithDuration\ActivityRecordWithDuration;
-use Activity\ActivitySprintWithDuration\ActivitySprintWithDuration;
+use Activity\ActivitySprintWithDuration\ActivitySprintWithDurationRecord;
 use Activity\Duration;
 use Activity\Settings;
 
@@ -25,7 +25,7 @@ class IsActivityRecordExceedingTimeLimit
     /** @var ActivityRecordWithDuration */
     private $activityRecordWithDurationArtificialAfterInactivity;
 
-    public function __construct(ActivitySprintWithDuration $activitySprintWithDurationWithoutCurrentActivityRecord, ActivityRecordInterface $activityRecordCurrent)
+    public function __construct(ActivitySprintWithDurationRecord $activitySprintWithDurationWithoutCurrentActivityRecord, ActivityRecordInterface $activityRecordCurrent)
     {
         $previousActivityRecordWithDuration = new ActivityRecordWithDuration($activitySprintWithDurationWithoutCurrentActivityRecord->getLastActivityRecordWithDurationUpToDate()->getActivityRecord(),
             new Duration(

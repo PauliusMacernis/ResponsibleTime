@@ -8,7 +8,7 @@ use Activity\ActivityRecord\ActivityRecordOnGuessableActivityPrevious;
 use Activity\ActivityRecord\ActivityRecordOnPowerOff;
 use Activity\ActivityRecordAndSprintReset\ActivityRecordAndSprintReset;
 use Activity\ActivityRecordWithDuration\ActivityRecordWithDuration;
-use Activity\ActivitySprintWithDuration\ActivitySprintWithDuration;
+use Activity\ActivitySprintWithDuration\ActivitySprintWithDurationRecord;
 use Activity\Duration;
 use Activity\Registry\ActivitySprintWithDurationRegistry;
 use Activity\Settings;
@@ -21,7 +21,7 @@ use DateTimeZone;
  */
 class ActivitySprintOfMorningInactivityRegistry
 {
-    /** @var ActivitySprintWithDuration */
+    /** @var ActivitySprintWithDurationRecord */
     private $data;
 
     public function __construct(ActivitySprintWithDurationRegistry $sprintRegistry, ActivityRecordInterface $currentActivityRecord)
@@ -60,7 +60,7 @@ class ActivitySprintOfMorningInactivityRegistry
             );
 
             // The very first sprint initialization (oh man, you should sleep at this time)
-            $veryFirstSprintWithDuration = new ActivitySprintWithDuration(
+            $veryFirstSprintWithDuration = new ActivitySprintWithDurationRecord(
                 $veryFirstActivityRecordWithDurationOnInactivity->getActivityRecord(),
                 $veryFirstActivityRecordWithDurationOnInactivity,
                 $currentActivityRecord
@@ -73,7 +73,7 @@ class ActivitySprintOfMorningInactivityRegistry
         $this->data = $this->getCurrentRecordWithArtificialDurationAddedToActivitySprint($activityRecordToAddLaterOn);
     }
 
-    public function getData(): ActivitySprintWithDuration
+    public function getData(): ActivitySprintWithDurationRecord
     {
         return $this->data;
     }
@@ -85,10 +85,10 @@ class ActivitySprintOfMorningInactivityRegistry
         return $firstPossibleActivityDateTimeEnd;
     }
 
-    private function getCurrentRecordWithArtificialDurationAddedToActivitySprint(ActivityRecordInterface $currentActivityRecord): ActivitySprintWithDuration
+    private function getCurrentRecordWithArtificialDurationAddedToActivitySprint(ActivityRecordInterface $currentActivityRecord): ActivitySprintWithDurationRecord
     {
         $reset = new ActivityRecordAndSprintReset($currentActivityRecord);
-        $activitySprintWithArtificialDurationOfNewActivity = new ActivitySprintWithDuration(
+        $activitySprintWithArtificialDurationOfNewActivity = new ActivitySprintWithDurationRecord(
             $currentActivityRecord,
             $reset->getActivityRecordWithDurationArtificial(),
             null

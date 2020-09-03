@@ -7,6 +7,7 @@ use Activity\ActivityRecordConversionToActivitySprint;
 use Activity\Decision\IsActivityRecordExceedingTimeLimit;
 use Activity\Records\Records;
 use Activity\Registry\ActivitySprintWithDurationRegistry;
+use Activity\Registry\Composite\ActivitySprintOfEveningInactivityRegistry;
 use Activity\Registry\Composite\ActivitySprintOfMorningInactivityRegistry;
 use Activity\Registry\Composite\ActivitySprintWithArtificialDurationOfPreviousActivityAddedToSprintRegistry;
 use Activity\Settings;
@@ -58,6 +59,11 @@ foreach ($records as $currentActivityRecord) {
     $activitySprintWithArtificialDurationOfPreviousActivity = (new ActivityRecordConversionToActivitySprint($sprintRegistry, $currentActivityRecord, $activitySprintWithArtificialDurationOfPreviousActivity))->getActivitySprintWithDuration();
 }
 
-if (null !== $activitySprintWithArtificialDurationOfPreviousActivity) {
-    $sprintRegistry->add($activitySprintWithArtificialDurationOfPreviousActivity);
+if (isset($currentActivityRecord)) { // $currentActivityRecord is actually the last activity record, if any records were at all
+    $activitySprintWithArtificialDurationOfLastActivity = (
+        new ActivitySprintOfEveningInactivityRegistry(
+            $sprintRegistry,
+            $currentActivityRecord
+        )
+    )->getData();
 }

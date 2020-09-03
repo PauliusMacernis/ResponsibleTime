@@ -5,7 +5,7 @@ namespace Activity\ActivityRecordAndSprintReset;
 
 use Activity\ActivityRecord\ActivityRecordInterface;
 use Activity\ActivityRecordWithDuration\ActivityRecordWithDuration;
-use Activity\ActivitySprintWithDuration\ActivitySprintWithDuration;
+use Activity\ActivitySprintWithDuration\ActivitySprintWithDurationRecord;
 use Activity\Duration;
 use Activity\Settings;
 use DateInterval;
@@ -15,7 +15,7 @@ class ActivityRecordAndSprintReset
     /** @var ActivityRecordWithDuration */
     private $activityRecordWithDurationArtificial;
 
-    /** @var ActivitySprintWithDuration */
+    /** @var ActivitySprintWithDurationRecord */
     private $activitySprintWithDurationArtificial;
 
     public function __construct(ActivityRecordInterface $activityRecord)
@@ -30,7 +30,7 @@ class ActivityRecordAndSprintReset
         $this->activityRecordWithDurationArtificial = new ActivityRecordWithDuration($activityRecord, $durationArtificial);
 
         $activityRecordWithDuration = new ActivityRecordWithDuration($activityRecord, $durationArtificial);
-        $this->activitySprintWithDurationArtificial = new ActivitySprintWithDuration($activityRecord, $activityRecordWithDuration, null);
+        $this->activitySprintWithDurationArtificial = new ActivitySprintWithDurationRecord($activityRecord, $activityRecordWithDuration, null);
     }
 
     public function getActivityRecordWithDurationArtificial(): ActivityRecordWithDuration
@@ -38,7 +38,7 @@ class ActivityRecordAndSprintReset
         return $this->activityRecordWithDurationArtificial;
     }
 
-    public function getActivitySprintWithDurationArtificial(): ActivitySprintWithDuration
+    public function getActivitySprintWithDurationArtificial(): ActivitySprintWithDurationRecord
     {
         return $this->activitySprintWithDurationArtificial;
     }

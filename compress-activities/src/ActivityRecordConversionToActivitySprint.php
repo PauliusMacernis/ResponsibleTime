@@ -5,16 +5,16 @@ namespace Activity;
 
 use Activity\ActivityRecord\ActivityRecordInterface;
 use Activity\ActivityRecordAndSprintReset\ActivityRecordAndSprintReset;
-use Activity\ActivitySprintWithDuration\ActivitySprintWithDuration;
+use Activity\ActivitySprintWithDuration\ActivitySprintWithDurationRecord;
 use Activity\Decision\IsSameActivity;
 use Activity\Registry\ActivitySprintWithDurationRegistry;
 
 class ActivityRecordConversionToActivitySprint
 {
-    /** @var ActivitySprintWithDuration */
+    /** @var ActivitySprintWithDurationRecord */
     private $activitySprintWithDuration;
 
-    public function __construct(ActivitySprintWithDurationRegistry $sprintRegistry, ActivityRecordInterface $activityRecord, ?ActivitySprintWithDuration $activitySprintWithDuration)
+    public function __construct(ActivitySprintWithDurationRegistry $sprintRegistry, ActivityRecordInterface $activityRecord, ?ActivitySprintWithDurationRecord $activitySprintWithDuration)
     {
         // First record
         // First record is always incomplete as we need data on the second activity to determine how long the first activity took
@@ -25,7 +25,7 @@ class ActivityRecordConversionToActivitySprint
         if ($this->isVeryFirstActivityRecord($activitySprintWithDuration)) { // First record
             $activitySprintWithDuration = $reset->getActivitySprintWithDurationArtificial();
         } else {
-            $activitySprintWithDuration = new ActivitySprintWithDuration(
+            $activitySprintWithDuration = new ActivitySprintWithDurationRecord(
                 $activitySprintWithDuration->getActivityRecordThatStartedSprint(),
                 $reset->getActivityRecordWithDurationArtificial(),
                 null
@@ -37,7 +37,7 @@ class ActivityRecordConversionToActivitySprint
 
         // In case it is the same type of activity, we add up the time so at the end we have duration: FROM first activity of the type (start) TO this activity start+max activity duration possible (end).
         if (true === $isSameActivity) {
-            $activitySprintWithDuration = new ActivitySprintWithDuration(
+            $activitySprintWithDuration = new ActivitySprintWithDurationRecord(
                 $activitySprintWithDuration->getActivityRecordThatStartedSprint(),
                 $reset->getActivityRecordWithDurationArtificial(),
                 null
@@ -46,7 +46,7 @@ class ActivityRecordConversionToActivitySprint
 
         // In case this is the activity starting the new sprint
         if (false === $isSameActivity) {
-            $activitySprintWithDuration = new ActivitySprintWithDuration(
+            $activitySprintWithDuration = new ActivitySprintWithDurationRecord(
                 $activitySprintWithDuration->getActivityRecordThatStartedSprint(),
                 $activitySprintWithDuration->getActivityRecordThatCompletedSprintWithArtificialDateTime(),
                 $activityRecord
@@ -63,12 +63,12 @@ class ActivityRecordConversionToActivitySprint
         $this->activitySprintWithDuration = $activitySprintWithDuration;
     }
 
-    public function getActivitySprintWithDuration(): ActivitySprintWithDuration
+    public function getActivitySprintWithDuration(): ActivitySprintWithDurationRecord
     {
         return $this->activitySprintWithDuration;
     }
 
-    private function isVeryFirstActivityRecord(?ActivitySprintWithDuration $activitySprintWithDuration): bool
+    private function isVeryFirstActivityRecord(?ActivitySprintWithDurationRecord $activitySprintWithDuration): bool
     {
         return null === $activitySprintWithDuration;
     }

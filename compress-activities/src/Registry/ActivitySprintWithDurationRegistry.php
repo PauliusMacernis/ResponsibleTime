@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Activity\Registry;
 
-use Activity\ActivitySprintWithDuration\ActivitySprintWithDuration;
+use Activity\ActivitySprintWithDuration\ActivitySprintWithDurationRecord;
 
 /**
  * Whatever we do with the found sprints...
@@ -11,7 +11,7 @@ use Activity\ActivitySprintWithDuration\ActivitySprintWithDuration;
  */
 class ActivitySprintWithDurationRegistry
 {
-    public function add(ActivitySprintWithDuration $activitySprintWithDuration): void
+    public function add(ActivitySprintWithDurationRecord $activitySprintWithDuration): void
     {
         echo
             "\n"

@@ -8,7 +8,7 @@ use Activity\ActivityRecordWithDuration\ActivityRecordWithDuration;
 use Activity\Duration;
 use RuntimeException;
 
-class ActivitySprintWithDuration
+class ActivitySprintWithDurationRecord
 {
     /** @var ActivityRecordInterface */
     private $activityRecordThatStartedSprint;

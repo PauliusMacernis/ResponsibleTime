@@ -9,6 +9,8 @@ use Activity\ActivityRecordPart\Pid;
 use Activity\ActivityRecordPart\WindowId;
 use Activity\ActivityRecordPart\WindowTitle;
 use Activity\ActivityRecordPart\WmClass;
+use Activity\Settings;
+use DateInterval;
 use DateTimeInterface;
 
 abstract class ActivityRecordAbstract implements ActivityRecordInterface
@@ -76,6 +78,13 @@ abstract class ActivityRecordAbstract implements ActivityRecordInterface
     public function getWindowTitle(): WindowTitle
     {
         return $this->windowTitle;
+    }
+
+    public function getDateTimeEndArtificial(): DateTimeInterface
+    {
+        $firstPossibleActivityDateTimeEnd = clone $this->dateTime;
+        $firstPossibleActivityDateTimeEnd->add(new DateInterval(sprintf('PT%sS', Settings::MAX_ACTIVITY_RECORD_TIME_IN_SECONDS)));
+        return $firstPossibleActivityDateTimeEnd;
     }
 
     public function __toString()

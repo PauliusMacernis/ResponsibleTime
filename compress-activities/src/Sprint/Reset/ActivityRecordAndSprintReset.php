@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ResponsibleTime\SprintWithDuration\Reset;
+namespace ResponsibleTime\Sprint\Reset;
 
 use DateInterval;
 use ResponsibleTime\Activity\Record\ActivityRecordInterface;

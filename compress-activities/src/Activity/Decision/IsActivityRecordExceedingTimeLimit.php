@@ -8,8 +8,8 @@ use ResponsibleTime\Activity\RecordWithDuration\ActivityRecordOnPowerOffWithDura
 use ResponsibleTime\Activity\RecordWithDuration\ActivityRecordWithDuration;
 use ResponsibleTime\Duration\Duration;
 use ResponsibleTime\Settings;
+use ResponsibleTime\Sprint\Reset\ActivityRecordAndSprintReset;
 use ResponsibleTime\SprintRegistry\SprintRegistryRecord;
-use ResponsibleTime\SprintWithDuration\Reset\ActivityRecordAndSprintReset;
 
 class IsActivityRecordExceedingTimeLimit
 {

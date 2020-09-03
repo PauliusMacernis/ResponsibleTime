@@ -6,11 +6,11 @@ require_once('vendor/autoload.php');
 use ResponsibleTime\Activity\Decision\IsActivityRecordExceedingTimeLimit;
 use ResponsibleTime\Activity\Records\Records;
 use ResponsibleTime\Settings;
+use ResponsibleTime\Sprint\RecordWithDuration\First\FirstRecordAddedToSprintRegistry;
+use ResponsibleTime\Sprint\RecordWithDuration\Last\LastRecordAddedToSprintRegistry;
+use ResponsibleTime\Sprint\RecordWithDuration\MiddleExceedingTimeLimit\MiddleRecordExceedingTimeLimitAddedToSprintRegistry;
+use ResponsibleTime\Sprint\RecordWithDuration\MiddleNotExceedingTimeLimit\MiddleRecordNotExceedingTimeLimitAddedToSprintRegistry;
 use ResponsibleTime\SprintRegistry\SprintRegistry;
-use ResponsibleTime\SprintWithDuration\RecordWithDuration\First\FirstRecordAddedToSprintRegistry;
-use ResponsibleTime\SprintWithDuration\RecordWithDuration\Last\LastRecordAddedToSprintRegistry;
-use ResponsibleTime\SprintWithDuration\RecordWithDuration\MiddleExceedingTimeLimit\MiddleRecordExceedingTimeLimitAddedToSprintRegistry;
-use ResponsibleTime\SprintWithDuration\RecordWithDuration\MiddleNotExceedingTimeLimit\MiddleRecordNotExceedingTimeLimitAddedToSprintRegistry;
 
 $dateTimeEarlyMidnight = DateTime::createFromFormat('Y-m-d\TH:i:s.u', '2020-08-28T00:00:00.000000', new DateTimeZone(Settings::RECORD_DATETIME_TIMEZONE_FOR_PHP));
 

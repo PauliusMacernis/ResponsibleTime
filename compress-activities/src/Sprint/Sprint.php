@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace ResponsibleTime\SprintWithDuration;
+namespace ResponsibleTime\Sprint;
 
 use ResponsibleTime\Activity\Decision\IsSameActivity;
 use ResponsibleTime\Activity\Record\ActivityRecordInterface;
+use ResponsibleTime\Sprint\Reset\ActivityRecordAndSprintReset;
 use ResponsibleTime\SprintRegistry\SprintRegistry;
 use ResponsibleTime\SprintRegistry\SprintRegistryRecord;
-use ResponsibleTime\SprintWithDuration\Reset\ActivityRecordAndSprintReset;
 
 class Sprint
 {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ResponsibleTime\SprintWithDuration\RecordWithDuration\MiddleExceedingTimeLimit;
+namespace ResponsibleTime\Sprint\RecordWithDuration\MiddleExceedingTimeLimit;
 
 use ResponsibleTime\Activity\Decision\IsActivityRecordExceedingTimeLimit;
 use ResponsibleTime\Activity\Record\ActivityRecordInterface;

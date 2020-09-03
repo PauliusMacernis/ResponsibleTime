@@ -12,9 +12,9 @@ use ResponsibleTime\Activity\Record\ActivityRecordOnPowerOff;
 use ResponsibleTime\Activity\RecordWithDuration\ActivityRecordWithDuration;
 use ResponsibleTime\Duration\Duration;
 use ResponsibleTime\Settings;
+use ResponsibleTime\Sprint\Reset\ActivityRecordAndSprintReset;
 use ResponsibleTime\SprintRegistry\SprintRegistry;
 use ResponsibleTime\SprintRegistry\SprintRegistryRecord;
-use ResponsibleTime\SprintWithDuration\Reset\ActivityRecordAndSprintReset;
 
 /**
  * Takes care of the very first inactivity which happens from 00:00 up to the time the first record is found.

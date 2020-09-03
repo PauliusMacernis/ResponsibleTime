@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ResponsibleTime\SprintWithDuration\RecordWithDuration\Last;
+namespace ResponsibleTime\Sprint\RecordWithDuration\Last;
 
 use ResponsibleTime\Activity\Record\ActivityRecordInterface;
 use ResponsibleTime\SprintRegistry\Composite\PossibleInactivitySprintOfLateEveningAddedToSprintRegistry;

@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace ResponsibleTime\SprintWithDuration\RecordWithDuration\First;
+namespace ResponsibleTime\Sprint\RecordWithDuration\First;
 
 use ResponsibleTime\Activity\Record\ActivityRecordInterface;
+use ResponsibleTime\Sprint\Sprint;
 use ResponsibleTime\SprintRegistry\Composite\PossibleInactivitySprintOfEarlyMorningAddedToSprintRegistry;
 use ResponsibleTime\SprintRegistry\SprintRegistry;
 use ResponsibleTime\SprintRegistry\SprintRegistryRecord;
-use ResponsibleTime\SprintWithDuration\Sprint;
 
 class FirstRecordAddedToSprintRegistry
 {

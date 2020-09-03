@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace ResponsibleTime\SprintWithDuration\RecordWithDuration\MiddleNotExceedingTimeLimit;
+namespace ResponsibleTime\Sprint\RecordWithDuration\MiddleNotExceedingTimeLimit;
 
 use ResponsibleTime\Activity\Record\ActivityRecordInterface;
+use ResponsibleTime\Sprint\Sprint;
 use ResponsibleTime\SprintRegistry\SprintRegistry;
 use ResponsibleTime\SprintRegistry\SprintRegistryRecord;
-use ResponsibleTime\SprintWithDuration\Sprint;
 
 class MiddleRecordNotExceedingTimeLimitAddedToSprintRegistry
 {

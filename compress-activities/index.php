@@ -18,6 +18,7 @@ $fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidn
 //$fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-min2.txt';
 //$fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-min-min.txt';
 //$fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-min3.txt';
+$fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-test.txt';
 $fileToWrite = $fileToRead . '.unique';
 
 $records = new Records($fileToRead);

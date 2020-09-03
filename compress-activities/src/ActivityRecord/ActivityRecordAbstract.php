@@ -38,6 +38,11 @@ abstract class ActivityRecordAbstract implements ActivityRecordInterface
     protected $windowTitle;
 
 
+    public function getRawRecordFromFile(): string
+    {
+        return $this->rawRecordFromFile;
+    }
+
     public function getDateTime(): DateTimeInterface
     {
         return $this->dateTime;

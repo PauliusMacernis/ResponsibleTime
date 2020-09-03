@@ -9,24 +9,26 @@ If you just want to track your own activities on the computer over the day - thi
 - *For Ubuntu 20.04 users only:* Inactivity not always properly detected (e.g. locking the screen) therefore minimizing all the Windows (`Super` + `D`) before is a workaround.
 - *For Ubuntu 20.04 users only:* Some more advanced cases not tested, e.g.: multiple users, multiple working spaces, hibernate, etc. 
 - Activities may "compress" into "activity sprints" which is same activity repeatedly recorded for seconds, minutes, etc. See `compress-activities`
-- First activity starting 00:00:00 and lasting up to the real first activity in the daily record log is added as "inactivity" in case the first activity in the log does not start at that exact time.
+- First activity starting 00:00:00 and lasting up to the real first activity in the daily record log is added as "inactivity" in case the first activity in the log is far away from the early midnight
+- First activity starting 00:00:00 and lasting up to the real first activity in the daily record log is added as extended up to exact midnight (00:00:00) in case the first activity in the log is very close to the early midnight
 
 
-## INITIAL TODO LIST. THE LIST IS ON ARCHITECTURING PHASE. THEREFORE IT MAY CHANGE A BIT. TRYING TO FIND THE BEST SOLUTION "ON THE PAPER" AT FIRST.
+## Next
 
+- End time adjustments in the similar way the start time has been adjusted.
+
+
+## The Vision
+
+THE FOLLOWING LIST IS ON ARCHITECTURE-DEVELOPMENT PHASE. THEREFORE, IT MAY CHANGE QUITE A BIT.  
+I AM TRYING TO FIND THE TECHNICAL EXPLANATIONS TO "THE VISION" I HAVE, AND I TRY TO PUT ALL OF IT HERE AS "AN ABSTRACT PLAN".
+  
 TODO: Scripts, bots, other beauties to develop:
 - Scan working processes for "task-alike" (e.g. "AP-number") patterns.  
-  See: https://superuser.com/questions/382616/detecting-currently-active-window  
-  Explore: 
-  ```
-  for x in $(seq 1 10); do sleep 5; wmctrl -lp | grep $(xprop -root | \
-  grep _NET_ACTIVE_WINDOW | head -1 | awk '{print $5}' | sed 's/,//' | \
-  sed 's/^0x/0x0/'); done
-  ```
-  - Catch when the screen is locked
-  - Catch when no activity (no keyboard click, no mouse click, no mouse pointer move) 
-  - Determine patterns for: "work-related activity starts", "private-related activity starts". The default is "continue", if the first record - "private-related activity starts".
-- --The content down bellow is under the architecture question--
+- Catch when the screen is locked
+- Catch when no activity (no keyboard click, no mouse click, no mouse pointer move) 
+- Determine patterns for: "work-related activity starts", "private-related activity starts". The default is "continue", if the first record - "private-related activity starts".
+- --The content down bellow is under the even more questionable state--
 - When the new pattern match detected - send info to Toggle saying "stop all what is going on, start this one".
 - Send "stop" to Toggle when a computer turns off, reboots, a user logs off.
 - Send "start on unknown" to Toggle when certain software (patterns) starts and the clock is not running yet.
@@ -51,6 +53,7 @@ TODO: Scripts, bots, other beauties to develop:
 - It may be several tasks in the "Mental stack" (multitasking). Then toggl is ticking in 1 minute (config) chunks to each.
 - Order in the "Mental stack" matters. The higher is the task, the bigger time chunk (seconds) it logs to Toggl.
 - The ordered list of the "Mental stack" goes to Slack as a personal status message.
+- In case you have an empty "Mental stack", the message comes into Slack telling top 5 tasks with links to each you should take on by priority order.
 - You have to remove task from "Mental stack" when you finish your work. Otherwise, toggl will continue.
 - You will get the reminder to slack to release your "Mental stack" every 2 hours (config) (in case >1 issue there).
 - Script X pulls all issues from the desired JIRA columns (by default: "DOING": "In Progress", "Code review", configurable).
@@ -79,17 +82,10 @@ TODO: Scripts, bots, other beauties to develop:
 - Collect "TODO" out of each project and make it count as "technical debt & investment" impacts the estimation, health, etc.
 - WH and other bonuses, e.g. switch times between activities correlation to WH?
 
-
-TODO: lists to make:
+It seems the required lists to make may be these:
 - List JIRA systems (urls, boards) and associated credentials also "TODO", "DOING" and "DONE" mapping (all columns)
 - List JIRA assignee mapping when status change, e.g. Change "In Progress" to "Code review" will change the assignee too.
 - List Slack workspaces and associated credentials
 - Google calendar credentials (to look for the time slots, to book the meeting)
 - Working hours (to schedule meetings on the right time, etc.)
 - People list (email aliases, Slack info, etc.)
-
-
-# Run the project (Dev)
-
-- `docker-compose up --build`  
-- http://localhost:8088/index.php  

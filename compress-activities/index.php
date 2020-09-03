@@ -12,7 +12,7 @@ use ResponsibleTime\SprintWithDuration\RecordWithDuration\Last\LastRecordAddedTo
 use ResponsibleTime\SprintWithDuration\RecordWithDuration\MiddleExceedingTimeLimit\MiddleRecordExceedingTimeLimitAddedToSprintRegistry;
 use ResponsibleTime\SprintWithDuration\RecordWithDuration\MiddleNotExceedingTimeLimit\MiddleRecordNotExceedingTimeLimitAddedToSprintRegistry;
 
-$dateTimeEarlyMidnight = DateTime::createFromFormat('Y-m-d H:i:s', '2020-08-28 00:00:00', new DateTimeZone(Settings::RECORD_DATETIME_TIMEZONE_FOR_PHP));
+$dateTimeEarlyMidnight = DateTime::createFromFormat('Y-m-d\TH:i:s.u', '2020-08-28T00:00:00.000000', new DateTimeZone(Settings::RECORD_DATETIME_TIMEZONE_FOR_PHP));
 
 $fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . ' (copy).txt';
 //$fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-min.txt';

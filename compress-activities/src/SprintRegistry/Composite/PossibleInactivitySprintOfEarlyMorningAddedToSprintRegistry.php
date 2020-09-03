@@ -26,7 +26,7 @@ class PossibleInactivitySprintOfEarlyMorningAddedToSprintRegistry
 
     public function __construct(SprintRegistry $sprintRegistry, ActivityRecordInterface $currentActivityRecord)
     {
-        $earlyMidnightDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $currentActivityRecord->getDateTime()->format('Y-m-d 00:00:00'), new DateTimeZone(Settings::RECORD_DATETIME_TIMEZONE_FOR_PHP));
+        $earlyMidnightDateTime = DateTime::createFromFormat('Y-m-d\TH:i:s.u', $currentActivityRecord->getDateTime()->format('Y-m-d\T00:00:00.000000'), new DateTimeZone(Settings::RECORD_DATETIME_TIMEZONE_FOR_PHP));
         $activitySprintWithArtificialDurationOfNewActivity = null;
         $activityRecordToAddLaterOn = $currentActivityRecord;
 

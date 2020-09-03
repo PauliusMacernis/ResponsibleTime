@@ -31,7 +31,7 @@ class ActivityRecordOnGuessableActivityPrevious extends ActivityRecordAbstract
 
     public function resetDateTime(): void
     {
-        $this->dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $this->getDateTime()->format('Y-m-d 00:00:00'), new DateTimeZone(Settings::RECORD_DATETIME_TIMEZONE_FOR_PHP));
+        $this->dateTime = DateTime::createFromFormat('Y-m-d\TH:i:s.u', $this->getDateTime()->format('Y-m-d\T00:00:00.000000'), new DateTimeZone(Settings::RECORD_DATETIME_TIMEZONE_FOR_PHP));
     }
 
     public function isUserActivity(): bool

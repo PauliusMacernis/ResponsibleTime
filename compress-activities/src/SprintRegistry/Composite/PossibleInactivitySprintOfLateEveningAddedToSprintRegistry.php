@@ -25,10 +25,11 @@ class PossibleInactivitySprintOfLateEveningAddedToSprintRegistry
 
     public function __construct(SprintRegistry $sprintRegistry, ActivityRecordInterface $lastActivityRecord)
     {
-        // @TODO: Making 23:59:59 the latest because some systems may misunderstand the day change.
+        // Making 23:59:59 the latest because some systems may misunderstand the day change.
         // If misunderstanding will not be the case when connecting to other systems
-        // then we may come back and change this to match the day entirely up to 24:00:00 of the same day, or 00:00:00 of the next day.
-        $latestMidnightActivityDateTimeEnd = DateTime::createFromFormat('Y-m-d H:i:s', $lastActivityRecord->getDateTime()->format('Y-m-d 23:59:59'), new DateTimeZone(Settings::RECORD_DATETIME_TIMEZONE_FOR_PHP));
+        // then we may come back and consider changing this to match the day entirely up to 24:00:00 of the same day, or 00:00:00 of the next day.
+        // For now, we use the closes datetime possible to get to the end of the day, e.g. we use microseconds here to make sure we are on the most precise last time unit here.
+        $latestMidnightActivityDateTimeEnd = DateTime::createFromFormat('Y-m-d\TH:i:s.u', $lastActivityRecord->getDateTime()->format('Y-m-d\T23:59:59.999999'), new DateTimeZone(Settings::RECORD_DATETIME_TIMEZONE_FOR_PHP));
         $latestMidnightActivityDateTimeStart = $this->getPossibleActivityDateTimeStartWhenEndDateTimeIsKnown($latestMidnightActivityDateTimeEnd);
 
         $activitySprintWithFixedDurationOfLatestActivity = null;

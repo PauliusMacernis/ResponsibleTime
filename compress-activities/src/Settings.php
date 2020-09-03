@@ -33,7 +33,7 @@ class Settings
      * Defines time format of the record in the initial text-log file.
      */
     public const RECORD_DATETIME_FORMAT_FOR_PHP = "Y-m-d\TH:i:s.v\Z";
-    public const RECORD_DATETIME_TIMEZONE_FOR_PHP = "Z";
+    public const RECORD_DATETIME_TIMEZONE_FOR_PHP = "Z"; // Must be the same as in the format above
     /**
      * @var string These are the files in where records are stored. The format matches the ones in PHP datetime.
      * @TODO: DRY: See shell scripts collecting records to this file

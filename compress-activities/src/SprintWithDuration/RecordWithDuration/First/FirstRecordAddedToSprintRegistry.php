@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace ResponsibleTime\SprintWithDuration\RecordWithDuration\First;
 
 use ResponsibleTime\Activity\Record\ActivityRecordInterface;
-use ResponsibleTime\SprintRegistry\Composite\PossibleMorningInactivitySprintAddedToSprintRegistry;
+use ResponsibleTime\SprintRegistry\Composite\PossibleInactivitySprintOfEarlyMorningAddedToSprintRegistry;
 use ResponsibleTime\SprintRegistry\SprintRegistry;
 use ResponsibleTime\SprintRegistry\SprintRegistryRecord;
 use ResponsibleTime\SprintWithDuration\Sprint;
@@ -20,7 +20,7 @@ class FirstRecordAddedToSprintRegistry
             $sprintRegistry,
             $currentActivityRecord,
             (
-            new PossibleMorningInactivitySprintAddedToSprintRegistry(
+            new PossibleInactivitySprintOfEarlyMorningAddedToSprintRegistry(
                 $sprintRegistry,
                 $currentActivityRecord
             )

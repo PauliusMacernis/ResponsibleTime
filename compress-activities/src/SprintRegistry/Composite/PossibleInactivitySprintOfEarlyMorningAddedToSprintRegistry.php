@@ -19,7 +19,7 @@ use ResponsibleTime\SprintWithDuration\Reset\ActivityRecordAndSprintReset;
 /**
  * Takes care of the very first inactivity which happens from 00:00 up to the time the first record is found.
  */
-class PossibleMorningInactivitySprintAddedToSprintRegistry
+class PossibleInactivitySprintOfEarlyMorningAddedToSprintRegistry
 {
     /** @var SprintRegistryRecord */
     private $data;

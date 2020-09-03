@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use Activity\ActivityRecord\ActivityRecordinterface;
+use ResponsibleTime\Activity\Record\ActivityRecordinterface;
 
 /**
  * @TODO: Make it usable or remove. Not in use at the moment.

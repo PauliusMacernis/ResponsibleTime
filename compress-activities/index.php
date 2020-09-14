@@ -14,12 +14,13 @@ use ResponsibleTime\SprintRegistry\SprintRegistry;
 
 $dateTimeEarlyMidnight = DateTime::createFromFormat('Y-m-d\TH:i:s.u', '2020-08-28T00:00:00.000000', new DateTimeZone(Settings::RECORD_DATETIME_TIMEZONE_FOR_PHP));
 
-$fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . ' (copy).txt';
-//$fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-min.txt';
-//$fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-min2.txt';
-//$fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-min-min.txt';
-//$fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-min3.txt';
-$fileToRead = '/home/paulius/.responsible-time/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-test.txt';
+$fileToRead = '/home/paulius/.ResponsibleTime/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . ' (copy).txt';
+//$fileToRead = '/home/paulius/.ResponsibleTime/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-min.txt';
+//$fileToRead = '/home/paulius/.ResponsibleTime/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-min2.txt';
+//$fileToRead = '/home/paulius/.ResponsibleTime/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-min-min.txt';
+//$fileToRead = '/home/paulius/.ResponsibleTime/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-min3.txt';
+$fileToRead = '/home/paulius/.ResponsibleTime/activities/' . $dateTimeEarlyMidnight->format(Settings::FILENAME_DATETIME_FORMAT_FOR_RECORDS) . '-test.txt';
+$fileToRead = '/home/paulius/.ResponsibleTime/activities/2020-09-03 (copy).txt';
 $fileToWrite = $fileToRead . '.unique';
 
 $records = new Records($fileToRead);
@@ -52,3 +53,6 @@ foreach ($records as $currentActivity) {
 if (isset($currentActivity)) { // $currentActivityRecord is actually the last activity record, if any records were at all
     new LastRecordAddedToSprintRegistry($sprintRegistry, $currentActivity);
 }
+
+
+//var_dump($sprintRegistry);

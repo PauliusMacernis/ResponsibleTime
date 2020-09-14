@@ -6,9 +6,9 @@ while true
 do
 
   # See: datetime format in compress-activities/src/Settings.php - must be the same
-  DATE_FOR_FILENAME=$(date '+%Y-%m-%d');
   # ISO8601 UTC timestamp + ms
   DATE_FOR_A_RECORD=$(date --utc +%FT%T.%3NZ);
+  DATE_FOR_FILENAME=$(echo "$DATE_FOR_A_RECORD" | awk '{print substr($0,0,10)}')
 
   ACTIVITY_RECORD_FILE=$DIR_FOR_ACTIVITY_RECORDS/"$DATE_FOR_FILENAME.txt"
 

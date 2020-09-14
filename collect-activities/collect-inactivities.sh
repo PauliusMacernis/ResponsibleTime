@@ -23,7 +23,7 @@ DBUS_MONITOR_MEMBER=AddMatch
 #  dbus-monitor --monitor >>"$ACTIVITY_RECORD_FILE"-dbus-monitor 2>&1
 
 
-# sudo cp /home/paulius/dev/Responsible-time/collect-activities/detect-inactivity.sh /etc/init.d/detect-inactivity.sh
+# sudo cp /home/paulius/dev/ResponsibleTime/collect-activities/detect-inactivity.sh /etc/init.d/detect-inactivity.sh
 # sudo chmod +x /etc/init.d/detect-inactivity.sh
 # cd /etc/rc2.d
 # sudo ln -s /etc/init.d/detect-inactivity.sh .
@@ -33,11 +33,11 @@ DBUS_MONITOR_MEMBER=AddMatch
 dbus-monitor --monitor |
 while read -r line; do
 #    echo "$line" |
-      echo "$line" >> /home/paulius/.responsible-time/activities/detect-inactivity.log
+      echo "$line" >> /home/paulius/.ResponsibleTime/activities/detect-inactivity.log
 #      if echo "$line" | grep -q '/org/gnome/desktop/lockdown/' ; then
-#          echo 'Logged off' >> /home/paulius/.responsible-time/activities/detect-inactivity.log
+#          echo 'Logged off' >> /home/paulius/.ResponsibleTime/activities/detect-inactivity.log
 #      fi
-#    echo "$line" | grep '/org/gnome/desktop/lockdown/' >> /home/paulius/.responsible-time/activities/detect-inactivity.log
+#    echo "$line" | grep '/org/gnome/desktop/lockdown/' >> /home/paulius/.ResponsibleTime/activities/detect-inactivity.log
 #| grep ActiveChanged && your_script_goes_here
 done
 

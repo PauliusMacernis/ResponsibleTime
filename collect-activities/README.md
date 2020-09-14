@@ -10,7 +10,7 @@ therefore reading a file from the top to the bottom will tell the story on how a
 
 Make sure the paths are correct in the following examples! Especially:  
 
-- The path to the script: change `/home/paulius/dev/Responsible-time/collect-activities/collect-activities.sh` to the path of the script with the same name you have pulled from git
+- The path to the script: change `/home/paulius/dev/ResponsibleTime/collect-activities/collect-activities.sh` to the path of the script with the same name you have pulled from git
 - Your home directory: change `/home/paulius` to the path of yours, everywhere you see in this document
 
 ## Collect activities
@@ -18,8 +18,8 @@ Make sure the paths are correct in the following examples! Especially:
 Collects info on what you do and logs that info to the directory on your machine.
 And here are instructions on how to install and activate the script collecting activities:
 
-- `mkdir -p ~/.responsible-time/activities` - create a directory for storing records on your activities
-- `sudo cp /home/paulius/dev/Responsible-time/collect-activities/collect-activities.sh /usr/bin/responsible-time-collect-activities.sh` -  copy the script from repository to /usr/bin dir
+- `mkdir -p ~/.ResponsibleTime/activities` - create a directory for storing records on your activities
+- `sudo cp /home/paulius/dev/ResponsibleTime/collect-activities/collect-activities.sh /usr/bin/responsible-time-collect-activities.sh` -  copy the script from repository to /usr/bin dir
 - `sudo chmod +x /usr/bin/responsible-time-collect-activities.sh` - make the script executable in the new place.
 - `mkdir -p ~/.config/systemd/user/` - create a dir for a unit
 - `touch ~/.config/systemd/user/responsible-time-collect-activities.service` - create the unit
@@ -31,7 +31,7 @@ And here are instructions on how to install and activate the script collecting a
   PartOf=graphical-session.target
   
   [Service]
-  ExecStart=/usr/bin/responsible-time-collect-activities.sh /home/paulius/.responsible-time/activities
+  ExecStart=/usr/bin/responsible-time-collect-activities.sh /home/paulius/.ResponsibleTime/activities
   # PrivateNetwork=yes
   # PrivateTmp=yes
   # ProtectSystem=full
@@ -43,13 +43,13 @@ And here are instructions on how to install and activate the script collecting a
   WantedBy=default.target
   ```
 - `Ctr+X` + `Y` + `Enter` - to save the unit file and exit the editor
-- `touch ~/.config/autostart/Responsible-time-collect-activities.desktop` - create the file that will launch the unit on startup
-- `nano ~/.config/autostart/Responsible-time-collect-activities.desktop` - open the unit launcher file for edit
+- `touch ~/.config/autostart/responsible-time-collect-activities.desktop` - create the file that will launch the unit on startup
+- `nano ~/.config/autostart/responsible-time-collect-activities.desktop` - open the unit launcher file for edit
 - Add the following content to the launcher file:
   ```
   [Desktop Entry]
   Type=Application
-  Name=Responsible time: Collect activities!
+  Name=Responsible time: Collect activities
   Exec=systemctl --user start responsible-time-collect-activities.service
   Comment=Starts Responsible time. The step of collecting activities will be enabled.
   X-GNOME-Autostart-enabled=true
@@ -57,7 +57,7 @@ And here are instructions on how to install and activate the script collecting a
 - `Ctr+X` + `Y` + `Enter` - to save the launcher file and exit the editor
 - Restart
 - `systemctl --user status responsible-time-collect-activities.service` - To see the status of the process, it must be running. 
-- `tail -f ~/.responsible-time/activities/*` - To see the status of the data, the records must update, and the titles must not be empty.
+- `tail -f ~/.ResponsibleTime/activities/*` - To see the status of the data, the records must update, and the titles must not be empty.
 
 ## Collect inactivities
 
@@ -69,8 +69,8 @@ and then applying the OS-related action, e.g. locking the screen without UI of a
 It may still be the issue (probably) if the application pops up due to cron or so while the session is locked.**
 **THIS SCRIPT IS UNDER DEVELOPMENT - IT DOES NOT WORK WELL NOW**
 
-- `touch ~/.config/autostart/Responsible-time-collect-inactivities.desktop` - create a launcher for inactivities detection
-- `nano ~/.config/autostart/Responsible-time-collect-inactivities.desktop` - open a launcher for inactivities detection for edit
+- `touch ~/.config/autostart/responsible-time-collect-inactivities.desktop` - create a launcher for inactivities detection
+- `nano ~/.config/autostart/responsible-time-collect-inactivities.desktop` - open a launcher for inactivities detection for edit
 - Add the following content to the launcher file:
   ```
   [Desktop Entry]
@@ -86,7 +86,7 @@ It may still be the issue (probably) if the application pops up due to cron or s
 
 ## Commands, related
 
-- `sudo cp /home/paulius/dev/Responsible-time/collect-activities/collect-activities.sh /usr/bin/responsible-time-collect-activities.sh && sudo chmod +x /usr/bin/responsible-time-collect-activities.sh && systemctl --user restart responsible-time-collect-activities.service` - to restart the script after any changes
+- `sudo cp /home/paulius/dev/ResponsibleTime/collect-activities/collect-activities.sh /usr/bin/responsible-time-collect-activities.sh && sudo chmod +x /usr/bin/responsible-time-collect-activities.sh && systemctl --user restart responsible-time-collect-activities.service` - to restart the script after any changes
 - `echo $XDG_CURRENT_DESKTOP` - to see which desktop environment is in use (expected `ubuntu:GNOME`, see for more: https://www.gnome.org/ )
 - `systemctl -t service` - list available systemd services
 - `systemctl list-unit-files -t service` - list all systemd unit files, including disabled ones

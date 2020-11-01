@@ -82,7 +82,17 @@ TODO: Scripts, bots, other beauties to develop:
 - Multiuser support on one machine?
 - Collect "TODO" out of each project and make it count as "technical debt & investment" impacts the estimation, health, etc.
 - WH and other bonuses, e.g. switch times between activities correlation to WH?
-- May Screenshots every now and then + Computer Vision be used to detect inactivity?
+- May Screenshots every now and then + Computer Vision be used to detect inactivity? E.g. something like the following code:
+
+```
+#!/usr/bin/env bash
+while true
+do 
+ scrot '%Y-%m-%d-%H:%M:%S.png' -e 'mv $f ~/Pictures/RegularScreenshots/' 
+ fswebcam -r 1280x720 --jpeg 85 -D 1 "$HOME/Pictures/RegularWebcam/%Y-%m-%d-%H:%M:%S.jpg"
+ sleep 300
+done
+```
 
 It seems the required lists to make may be these:
 - List JIRA systems (urls, boards) and associated credentials also "TODO", "DOING" and "DONE" mapping (all columns)

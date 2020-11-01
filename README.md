@@ -82,6 +82,7 @@ TODO: Scripts, bots, other beauties to develop:
 - Multiuser support on one machine?
 - Collect "TODO" out of each project and make it count as "technical debt & investment" impacts the estimation, health, etc.
 - WH and other bonuses, e.g. switch times between activities correlation to WH?
+- May Screenshots every now and then + Computer Vision be used to detect inactivity?
 
 It seems the required lists to make may be these:
 - List JIRA systems (urls, boards) and associated credentials also "TODO", "DOING" and "DONE" mapping (all columns)

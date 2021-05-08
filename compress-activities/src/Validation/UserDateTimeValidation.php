@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ResponsibleTime\UserDateTime;
+namespace ResponsibleTime\Validation;
 
 use DateTimeInterface;
 use ResponsibleTime\Settings;

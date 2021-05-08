@@ -12,7 +12,7 @@ use ResponsibleTime\Activity\Records\Records;
 use ResponsibleTime\Debug\Debug;
 use ResponsibleTime\Duration\Duration;
 use ResponsibleTime\Timeline\Timeline;
-use ResponsibleTime\UserDateTime\UserDateTimeValidation;
+use ResponsibleTime\Validation\UserDateTimeValidation;
 use RuntimeException;
 
 class Main

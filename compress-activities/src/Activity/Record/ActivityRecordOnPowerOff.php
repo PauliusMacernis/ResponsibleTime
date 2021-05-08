@@ -16,7 +16,7 @@ class ActivityRecordOnPowerOff extends ActivityRecordAbstract
 {
     public function __construct(DateTimeInterface $dateTimeStart)
     {
-        $this->dateTime = $dateTimeStart;
+        $this->setDateTime($dateTimeStart);
         $this->windowId = new WindowId('');
         $this->desktopId = new DesktopId('');
         $this->pid = new Pid('');

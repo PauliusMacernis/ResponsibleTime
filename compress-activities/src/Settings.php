@@ -6,6 +6,12 @@ namespace ResponsibleTime;
 class Settings
 {
     /**
+     * Directory in where the files containing activity records may be found
+     */
+    public const DIR_OF_ACTIVITY_RECORDS = '/home/paulius/.ResponsibleTime/activities/DemoData/';
+
+
+    /**
      * @var int
      * We expect activity records to appear every second.
      *

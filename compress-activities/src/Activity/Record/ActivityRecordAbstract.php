@@ -12,6 +12,7 @@ use ResponsibleTime\Activity\Record\Part\WindowId;
 use ResponsibleTime\Activity\Record\Part\WindowTitle;
 use ResponsibleTime\Activity\Record\Part\WmClass;
 use ResponsibleTime\Settings;
+use RuntimeException;
 
 abstract class ActivityRecordAbstract implements ActivityRecordInterface
 {
@@ -50,6 +51,11 @@ abstract class ActivityRecordAbstract implements ActivityRecordInterface
         return $this->dateTime;
     }
 
+    public function setDateTime(DateTimeInterface $dateTime): void
+    {
+        $this->dateTime = $dateTime;
+    }
+
     public function getWindowId(): WindowId
     {
         return $this->windowId;
@@ -82,9 +88,22 @@ abstract class ActivityRecordAbstract implements ActivityRecordInterface
 
     public function getDateTimeEndArtificial(): DateTimeInterface
     {
-        $firstPossibleActivityDateTimeEnd = clone $this->dateTime;
-        $firstPossibleActivityDateTimeEnd->add(new DateInterval(sprintf('PT%sS', Settings::MAX_ACTIVITY_RECORD_TIME_IN_SECONDS)));
-        return $firstPossibleActivityDateTimeEnd;
+        $dateTimeEndArtificial = $this->getDateTimeEndArtificialByCustomDateTimeFrom($this->dateTime);
+
+        if ($this->dateTime > $dateTimeEndArtificial) {
+            throw new RuntimeException('Activity record "from" datetime is later than activity record "to" datetime. Such scenario is not allowed.');
+        }
+
+        return $dateTimeEndArtificial;
+    }
+
+    public function getDateTimeEndArtificialByCustomDateTimeFrom(DateTimeInterface $dateTimeFrom): DateTimeInterface
+    {
+        $dateTimeFromCloned = clone $dateTimeFrom; // We need to clone, because we don't want to change the original value with "add" later on.
+
+        $dateTimeFromCloned->add(new DateInterval(sprintf('PT%sS', Settings::MAX_ACTIVITY_RECORD_TIME_IN_SECONDS)));
+
+        return $dateTimeFromCloned;
     }
 
     public function __toString()
@@ -93,4 +112,5 @@ abstract class ActivityRecordAbstract implements ActivityRecordInterface
     }
 
     abstract public function isUserActivity(): bool;
+
 }

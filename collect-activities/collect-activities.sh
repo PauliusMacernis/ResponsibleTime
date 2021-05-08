@@ -10,7 +10,7 @@ do
   DATE_FOR_A_RECORD=$(date --utc +%FT%T.%3NZ);
   DATE_FOR_FILENAME=$(echo "$DATE_FOR_A_RECORD" | awk '{print substr($0,0,10)}')
 
-  ACTIVITY_RECORD_FILE=$DIR_FOR_ACTIVITY_RECORDS/"$DATE_FOR_FILENAME.txt"
+  ACTIVITY_RECORD_FILE=$DIR_FOR_ACTIVITY_RECORDS/$DATE_FOR_FILENAME
 
   # See: https://superuser.com/questions/382616/detecting-currently-active-window (the script)
   # See: https://unix.stackexchange.com/questions/85244/setting-display-in-systemd-service-file (the way to launch it)

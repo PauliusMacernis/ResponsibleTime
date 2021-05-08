@@ -10,7 +10,8 @@ use ResponsibleTime\Activity\Record\Part\Pid;
 use ResponsibleTime\Activity\Record\Part\WindowId;
 use ResponsibleTime\Activity\Record\Part\WindowTitle;
 use ResponsibleTime\Activity\Record\Part\WmClass;
-use RuntimeException;
+use ResponsibleTime\Exception\InvalidActivityRecordException;
+use SplFileInfo;
 
 final class ActivityRecord extends ActivityRecordAbstract
 {
@@ -18,24 +19,24 @@ final class ActivityRecord extends ActivityRecordAbstract
     private const PATTERN_ALTERNATIVE = '/^(?<datetime>\\d{4}-[0-1]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d{3}Z)(?<window_title>.*)$/';
 
 
-    public function __construct(string $recordLineFromFile, int $sourceFileLineOriginalNumber)
+    public function __construct(string $recordLineFromFile, int $sourceFileLineOriginalNumber, SplFileInfo $pathToSourceFile)
     {
         $this->rawRecordFromFile = $recordLineFromFile;
         $result = preg_match_all(self::PATTERN, $recordLineFromFile, $patternMatches);
 
         if (false === $result) {
-            throw new RuntimeException(sprintf('Error matching record pattern. Impossible to extract an information out of the record #%s: %s', $sourceFileLineOriginalNumber, $recordLineFromFile));
+            throw new InvalidActivityRecordException(sprintf('Error matching record pattern. Impossible to extract an information out of the record #%s of file "%s": %s', $sourceFileLineOriginalNumber, $pathToSourceFile->getRealPath(), $recordLineFromFile));
         }
 
         if (0 === $result) { // Inactivity when the time is logged but the rest of the content is empty.
             $result = preg_match_all(self::PATTERN_ALTERNATIVE, $recordLineFromFile, $patternMatches);
             if (false === $result) {
-                throw new RuntimeException(sprintf('Error matching record pattern. Impossible to extract an information out of the record #%s: %s', $sourceFileLineOriginalNumber, $recordLineFromFile));
+                throw new InvalidActivityRecordException(sprintf('Error matching record pattern. Impossible to extract an information out of the record #%s of file "%s": %s', $sourceFileLineOriginalNumber, $pathToSourceFile->getRealPath(), $recordLineFromFile));
             }
         }
 
         if (!isset($patternMatches['datetime'][0])) {
-            throw new RuntimeException(sprintf('Error matching record pattern. Record #%s without datetime detected: %s', $sourceFileLineOriginalNumber, $recordLineFromFile));
+            throw new InvalidActivityRecordException(sprintf('Error matching record pattern. Record #%s of file "%s" without datetime detected: %s', $sourceFileLineOriginalNumber, $pathToSourceFile->getRealPath(), $recordLineFromFile));
         }
 
         if (
@@ -43,14 +44,14 @@ final class ActivityRecord extends ActivityRecordAbstract
             && false === empty($patternMatches['window_id'])
             && true === empty($patternMatches['window_title'])
         ) {
-            throw new RuntimeException(sprintf('Error matching record pattern. Record #%s with shifted values detected, impossible to correctly assign meanings to the parts of a record:, probably some info columns are missing %s', $sourceFileLineOriginalNumber, $recordLineFromFile));
+            throw new InvalidActivityRecordException(sprintf('Error matching record pattern. Record #%s of file "%s" with shifted values detected, impossible to correctly assign meanings to the parts of a record:, probably some info columns are missing %s', $sourceFileLineOriginalNumber, $pathToSourceFile->getRealPath(), $recordLineFromFile));
         }
 
         if ( // Set of values in inactivity case
             true === empty(trim($patternMatches['window_title'][0]))
             && false === empty(trim($patternMatches['datetime'][0]))
         ) {
-            $this->dateTime = new DateTime($patternMatches['datetime'][0]);
+            $this->setDateTime(new DateTime($patternMatches['datetime'][0]));
             $this->windowId = new WindowId('');
             $this->desktopId = new DesktopId('');
             $this->pid = new Pid('');
@@ -64,18 +65,16 @@ final class ActivityRecord extends ActivityRecordAbstract
                 . ($patternMatches['client_machine'][0] ?? '')
                 . ($patternMatches['window_title'][0] ?? '')
             );
-
-            return;
+        } else {
+            // Set of values in activity case
+            $this->setDateTime(new DateTime($patternMatches['datetime'][0]));
+            $this->windowId = new WindowId($patternMatches['window_id'][0]);
+            $this->desktopId = new DesktopId($patternMatches['desktop_id'][0]);
+            $this->pid = new Pid($patternMatches['PID'][0]);
+            $this->wmClass = new WmClass($patternMatches['WM_CLASS'][0]);
+            $this->clientMachine = new ClientMachine($patternMatches['client_machine'][0]);
+            $this->windowTitle = new WindowTitle($patternMatches['window_title'][0]);
         }
-
-        // Set of values in activity case
-        $this->dateTime = new DateTime($patternMatches['datetime'][0]);
-        $this->windowId = new WindowId($patternMatches['window_id'][0]);
-        $this->desktopId = new DesktopId($patternMatches['desktop_id'][0]);
-        $this->pid = new Pid($patternMatches['PID'][0]);
-        $this->wmClass = new WmClass($patternMatches['WM_CLASS'][0]);
-        $this->clientMachine = new ClientMachine($patternMatches['client_machine'][0]);
-        $this->windowTitle = new WindowTitle($patternMatches['window_title'][0]);
     }
 
     public function isUserActivity(): bool

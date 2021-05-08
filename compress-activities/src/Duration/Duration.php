@@ -22,6 +22,11 @@ class Duration
         return $this->dateTimeEnd->getTimestamp() - $this->dateTimeStart->getTimestamp();
     }
 
+    public function getDateTimeStart(): DateTimeInterface
+    {
+        return $this->dateTimeStart;
+    }
+
     public function getDateTimeEnd(): DateTimeInterface
     {
         return $this->dateTimeEnd;

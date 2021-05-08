@@ -1,3 +1,5 @@
+The information down bellow is not accurate, nor up-to date. Check `README.md` files in subdirectories to find out more.
+
 # Responsible time
 If you use Slack (https://slack.com/), Jira (https://www.atlassian.com/software/jira), Toggl (https://toggl.com/), Float (https://www.float.com/), Todoist (https://todoist.com/) and you have a person to account to (e.g. PM or client) then this tool is for you.  
 If you just want to track your own activities on the computer over the day - this tool is also for you.

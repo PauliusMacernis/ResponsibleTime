@@ -7,36 +7,52 @@ declare(strict_types=1);
 
 namespace ResponsibleTime\Activity\Records;
 
+use Exception;
 use Iterator;
 use ResponsibleTime\Activity\Record\ActivityRecord;
 use ResponsibleTime\Activity\Record\ActivityRecordInterface;
+use ResponsibleTime\Exception\InvalidActivityRecordException;
 use SplFileObject;
 
 class Records implements Iterator
 {
-    private $file;
-    private $key;
+    private ?SplFileObject $file;
+
+    private int $key;
+
+    /**
+     * A line from file
+     * @link https://php.net/manual/en/splfileobject.fgets.php
+     * @var string|false a string containing the next line from the file, or false on error.
+     */
     private $valueRaw;
+
+    private ?ActivityRecordInterface $valueObject;
 
     public function __construct(string $fileToRead)
     {
-        $this->file = new SplFileObject($fileToRead);
+        try {
+            $this->file = new SplFileObject($fileToRead);
+        } catch (Exception $exception){
+            // In case a file with activity records of a day does not exist
+            $this->file = null;
+        }
     }
 
-    public function current(): ActivityRecordInterface
+    public function current(): ?ActivityRecordInterface
     {
-        return new ActivityRecord($this->valueRaw, $this->getLineNumber());
+        try {
+            return new ActivityRecord($this->valueRaw, $this->getLineNumber(), $this->file);
+        } catch (InvalidActivityRecordException $exception) {
+            return null;
+        }
     }
 
     public function next(): void
     {
         ++$this->key;
-        if (false === $this->file->eof()) {
-            $this->valueRaw = $this->file->fgets();
-        } else {
-            $this->valueRaw = null;
-        }
-
+        $this->valueRaw = $this->file->fgets();
+        $this->setValueObjectOrNullFromValueRaw();
     }
 
     public function key(): int
@@ -46,20 +62,36 @@ class Records implements Iterator
 
     public function valid(): bool
     {
+        while ($this->valueObject === null && false === $this->file->eof()) {
+            // Skip items that cannot be resolved to objects, e.g. empty lines, broken formats, etc.
+            $this->next();
+        }
+
         return
-            null !== $this->valueRaw;
+            null !== $this->valueObject;
     }
 
     public function rewind(): void
     {
-        $this->file->rewind();
-
-        $this->key = 0;
-        $this->valueRaw = $this->file->fgets();
+        if(null !== $this->file) {
+            $this->file->rewind();
+            $this->key = 0;
+            $this->valueRaw = $this->file->fgets();
+            $this->setValueObjectOrNullFromValueRaw();
+        }
     }
 
     private function getLineNumber(): int
     {
         return $this->key + 1;
+    }
+
+    private function setValueObjectOrNullFromValueRaw(): void
+    {
+        try {
+            $this->valueObject = new ActivityRecord($this->valueRaw, $this->getLineNumber(), $this->file);
+        } catch (InvalidActivityRecordException $exception) {
+            $this->valueObject = null;
+        }
     }
 }

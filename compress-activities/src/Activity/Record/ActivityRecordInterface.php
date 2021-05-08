@@ -15,6 +15,8 @@ interface ActivityRecordInterface
 {
     public function getDateTime(): DateTimeInterface;
 
+    public function setDateTime(DateTimeInterface $dateTime): void;
+
     public function getWindowId(): WindowId;
 
     public function getDesktopId(): DesktopId;
@@ -29,6 +31,8 @@ interface ActivityRecordInterface
 
     /** Gets datetime of the end, this is artificial datetime value as the real one is unknown until the next record */
     public function getDateTimeEndArtificial(): DateTimeInterface;
+
+    public function getDateTimeEndArtificialByCustomDateTimeFrom(DateTimeInterface $dateTimeFrom): DateTimeInterface;
 
     public function isUserActivity(): bool;
 

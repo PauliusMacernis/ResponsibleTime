@@ -5,6 +5,7 @@ require_once('vendor/autoload.php');
 
 use ResponsibleTime\Main;
 use ResponsibleTime\Settings;
+use ResponsibleTime\Timeline\Projects\TimelineOfProjects;
 use ResponsibleTime\Timeline\Timeline;
 
 // Validate
@@ -30,5 +31,5 @@ $requestedUtcDateTimePeriodEnd = DateTime::createFromFormat(
     new DateTimeZone(Settings::RECORD_DATETIME_TIMEZONE_FOR_PHP)
 );
 
-$timeline = new Timeline();
+$timeline = new Timeline(new TimelineOfProjects());
 (new Main($requestedUtcDateTimePeriodStart, $requestedUtcDateTimePeriodEnd, $timeline))->processRecords();

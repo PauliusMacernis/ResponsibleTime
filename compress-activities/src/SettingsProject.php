@@ -85,21 +85,21 @@ class SettingsProject
                 // ------------- Github-based------------
                 'Any project on personal Github' => [
                     'WmClass' => '/.*/',
-                    'WindowTitle' => '/\WPauliusMacernis\/ResponsibleTime\W/'
+                    'WindowTitle' => '/\WPauliusMacernis\/ResponsibleTime\W/i'
                 ],
                 'Any project on personal Github (old)' => [
                     'WmClass' => '/.*/',
-                    'WindowTitle' => '/\Wsugalvojau\/Responsible-time\W/'
+                    'WindowTitle' => '/\Wsugalvojau\/Responsible-time\W/i'
                 ],
 
                 // -------------- File-based
                 'Any project in ~/dev/ResponsibleTime' => [
                     'WmClass' => '/.*/',
-                    'WindowTitle' => '/\W~\/dev\/ResponsibleTime\W/'
+                    'WindowTitle' => '/\W~\/dev\/ResponsibleTime\W/i'
                 ],
                 'Any project in ~/dev/Responsible-time (old)' => [
                     'WmClass' => '/.*/',
-                    'WindowTitle' => '/\W~\/dev\/Responsible-time\W/'
+                    'WindowTitle' => '/\W~\/dev\/Responsible-time\W/i'
                 ],
             ]
         ],
@@ -108,12 +108,21 @@ class SettingsProject
             'on' => [
                 'Any project on personal Github' => [
                     'WmClass' => '/.*/',
-                    'WindowTitle' => '/\WPauliusMacernis\W/'
+                    'WindowTitle' => '/\WPauliusMacernis\W/i'
                 ],
                 'Any project on personal Github (old)' => [
                     'WmClass' => '/.*/',
-                    'WindowTitle' => '/\Wsugalvojau\W/'
+                    'WindowTitle' => '/\Wsugalvojau\W/i'
                 ],
+            ]
+        ],
+
+        'Entertainment' => [
+            'on' => [
+                'Youtube' => [
+                    'WmClass' => '/.*/',
+                    'WindowTitle' => '/\Wyoutube\W/i'
+                ]
             ]
         ],
     ];

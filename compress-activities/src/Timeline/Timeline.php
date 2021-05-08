@@ -6,6 +6,7 @@ namespace ResponsibleTime\Timeline;
 use DateTimeInterface;
 use ResponsibleTime\Activity\Record\ActivityRecordInterface;
 use ResponsibleTime\Debug\Debug;
+use ResponsibleTime\Timeline\Projects\TimelineOfProjects;
 
 /**
  * Aka. Timeframe
@@ -20,6 +21,12 @@ class Timeline
 
     /** @var TimelineItem[] */
     private array $items;
+
+    private TimelineOfProjects $timelineOfProjects;
+
+    public function __construct(TimelineOfProjects $timelineOfProjects) {
+        $this->timelineOfProjects = $timelineOfProjects;
+    }
 
     public function addItemPreliminary(ActivityRecordInterface $activityRecord, DateTimeInterface $from, DateTimeInterface $to): void
     {
@@ -45,11 +52,20 @@ class Timeline
     {
         Debug::echoRecordWithFromAndToDateTimes($this->getItemPreliminary()->getActivityRecord(), $this->getItemPreliminary()->getFrom(), $this->getItemPreliminary()->getTo());
 
-        $this->items[] = new TimelineItem(
+        $activityRecordTimeLineItem = new TimelineItem(
             $this->getItemPreliminary()->getActivityRecord(),
             $this->getItemPreliminary()->getFrom(),
             $this->getItemPreliminary()->getTo(),
         );
+
+        $this->streamToTimelineOfProjects($activityRecordTimeLineItem);
+
+        $this->items[] = $activityRecordTimeLineItem;
         $this->resetItemPreliminary();
+    }
+
+    private function streamToTimelineOfProjects(TimelineItem $activityRecordTimeLineItem)
+    {
+        $this->timelineOfProjects->consumeItem($activityRecordTimeLineItem);
     }
 }

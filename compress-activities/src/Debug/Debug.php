@@ -34,9 +34,9 @@ class Debug
 
     public static function echoRecordWithFromAndToDateTimes(ActivityRecordInterface $activityRecord, DateTimeInterface $from, DateTimeInterface $to): void
     {
-        echo '[' . $from->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP) . ' - ' . $to->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP) . ']'
-            . PHP_EOL . $activityRecord->__toString()
-            . PHP_EOL . PHP_EOL;
+        echo PHP_EOL . PHP_EOL
+            . '[' . $from->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP) . ' - ' . $to->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP) . ']'
+            . PHP_EOL . $activityRecord->__toString();
     }
 
     public static function echoMethodName(string $__METHOD__): void

@@ -67,11 +67,28 @@ class SettingsProject
                 ]
             ]
         ],
+        'ETIMPIM' => [
+            'on' => [
+                'Any ETIMPIM-* ticket activity' => [
+                    'WmClass' => '/.*/',
+                    'WindowTitle' => '/\WETIMPIM-[0-9]+\W/'
+                ]
+            ]
+        ],
         'Libra' => [
             'on' => [
                 'Any LIBRA-* ticket activity' => [
                     'WmClass' => '/.*/',
                     'WindowTitle' => '/\WLIBRA-[0-9]+\W/'
+                ]
+            ]
+        ],
+
+        'Slack' => [
+            'on' => [
+                'Any Slack activity' => [
+                    'WmClass' => '/.*/',
+                    'WindowTitle' => '/\W*Slack*+\W/'
                 ]
             ]
         ],
@@ -100,6 +117,16 @@ class SettingsProject
                 'Any project in ~/dev/Responsible-time (old)' => [
                     'WmClass' => '/.*/',
                     'WindowTitle' => '/\W~\/dev\/Responsible-time\W/i'
+                ],
+            ]
+        ],
+
+        'Personal projects on PhpStorm: Responsible Time' => [
+            'on' => [
+                // -------------- phpStorm
+                'Any project with ResponsibleTime title in PhpStorm' => [
+                    'WmClass' => '/\Wphpstorm\W/i',
+                    'WindowTitle' => '/\WResponsibleTime\W/i'
                 ],
             ]
         ],

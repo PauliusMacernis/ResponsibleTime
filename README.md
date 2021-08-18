@@ -1,27 +1,22 @@
 The information down bellow is not accurate, nor up-to date. Check `README.md` files in subdirectories to find out more.
 
 # Responsible time
-If you use Slack (https://slack.com/), Jira (https://www.atlassian.com/software/jira), Toggl (https://toggl.com/), Float (https://www.float.com/), Todoist (https://todoist.com/) and you have a person to account to (e.g. PM or client) then this tool is for you.  
-If you just want to track your own activities on the computer over the day - this tool is also for you.
+Collects computer UI activities of yours into YOUR computer (Only Ubuntu OS is supported for now),  
+compresses the collected activities into summaries ready to be copy > paste to anywhere YOU wish.  
 
 
 ## What's done
 
 - *For Ubuntu 20.04 users only:* Scan daily activities, write records to the log file. See `collect-activities`
-- *For Ubuntu 20.04 users only:* Inactivity not always properly detected (e.g. locking the screen) therefore minimizing all the Windows (`Super` + `D`) before is a workaround.
+- *For Ubuntu 20.04 users only:* Inactivity not always properly detected (e.g. locking the screen) therefore minimizing all the Windows (`Super` + `D`) before is a workaround a person should be doing manually.
 - *For Ubuntu 20.04 users only:* Some more advanced cases not tested, e.g.: multiple users, multiple working spaces, hibernate, etc. 
 - Activities may "compress" into "activity sprints" which is same activity repeatedly recorded for seconds, minutes, etc. See `compress-activities`
 - First activity starting 00:00:00 and lasting up to the real first activity in the daily record log is added as "inactivity" in case the first activity in the log is far away from the early midnight
 - First activity starting 00:00:00 and lasting up to the real first activity in the daily record log is added as extended up to exact midnight (00:00:00) in case the first activity in the log is very close to the early midnight
-- End time adjustment to 23:59:59 in the similar way the start time has been adjusted to 00:00:00.
+- End time has been adjustment to 23:59:59 in the similar way - the start time has been adjusted to 00:00:00.
 
 
-## Next
-
-- Refactoring
-
-
-## The Vision
+## Drafting the future, related ideas
 
 THE FOLLOWING LIST IS ON ARCHITECTURE-DEVELOPMENT PHASE. THEREFORE, IT MAY CHANGE QUITE A BIT.  
 I AM TRYING TO FIND THE TECHNICAL EXPLANATIONS TO "THE VISION" I HAVE, AND I TRY TO PUT ALL OF IT HERE AS "AN ABSTRACT PLAN".

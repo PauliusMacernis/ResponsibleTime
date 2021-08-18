@@ -99,6 +99,8 @@ class Main
         }
 
         $this->processRecordLast($previousActivity);
+
+        $this->outputProjects();
     }
 
     /**
@@ -383,4 +385,106 @@ class Main
     {
         return $currentActivityThatMayCountIn->getDateTime() >= $this->requestedUtcDateTimePeriodEnd;
     }
+
+    private function outputProjects(): void
+    {
+        $previousProjectDateTimeEnd = null;
+        $projectsGroupedByTasks = [];
+
+        foreach ($this->timeline->getTimelineOfProjects()->getItems() as $project) {
+
+            $startDateTime = $previousProjectDateTimeEnd;
+            if (null === $previousProjectDateTimeEnd) {
+                $startDateTime = $project->getActivityRecordFirst()->getDateTime();
+            }
+
+            $time = clone $startDateTime;
+
+            try{
+                $project->getDateTimeEnd();
+            } catch (\Throwable $e) {
+                echo "Here is the issue";
+            }
+
+            $diff = $time->diff($project->getDateTimeEnd());
+            $durationInSecondsSprint = ($diff->days * 24 * 60 * 60) + ($diff->h * 60 * 60) + ($diff->i * 60) + ($diff->s);
+
+            $taskTitle = $project->getTaskTitle();
+            if (!isset($projectsGroupedByTasks[$taskTitle])) {
+                $projectsGroupedByTasks[$taskTitle] = [];
+            }
+            $projectsGroupedByTasks[$taskTitle][] = [
+                'project' => $project,
+                'windowTitle' => $project->getActivityRecordFirst()->getWindowTitle(),
+                'startDateTime' => $startDateTime->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP),
+                'endDateTime' => $project->getDateTimeEnd()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP),
+                'durationInSeconds' => $durationInSecondsSprint,
+            ];
+
+            $previousProjectDateTimeEnd = clone $project->getDateTimeEnd();
+
+        }
+
+        /**
+         * OUTPUT
+         */
+
+        echo PHP_EOL;
+        echo '***********************************' . PHP_EOL;
+        echo '***********************************' . PHP_EOL;
+        echo '************* PROJECTS ************' . PHP_EOL;
+        echo '***********************************' . PHP_EOL;
+        echo '***********************************' . PHP_EOL;
+
+        $durationInSecondsTotal = 0;
+        foreach ($projectsGroupedByTasks as $taskTitle => $sprintOfTaskRecords) {
+
+            echo '********************************' . PHP_EOL;
+            echo "Task: " . $taskTitle . PHP_EOL;
+
+            $durationInSecondsSprint = 0;
+            foreach($sprintOfTaskRecords as $taskRecord) {
+                $durationInSecondsSprint += $taskRecord['durationInSeconds'];
+
+                echo " - " . $taskRecord['startDateTime'] . ' - ' . $taskRecord['endDateTime'] . ' (' . $taskRecord['durationInSeconds'] . 's) : ' . $taskRecord['windowTitle'] . PHP_EOL;
+            }
+
+
+            $this->echoDurationText($durationInSecondsSprint);
+            echo PHP_EOL;
+
+            $durationInSecondsTotal += $durationInSecondsSprint;
+
+//            echo
+//                '----------' . PHP_EOL
+//                . $startDateTime->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP) . ' - ' . $project->getDateTimeEnd()->format(Settings::RECORD_DATETIME_FORMAT_FOR_PHP) . PHP_EOL
+//                . 'Duration: ' . $durationInSeconds . PHP_EOL
+//                . $project->getProjectTitle() . PHP_EOL
+//                //. $project->getActivityTypeTitle() . PHP_EOL
+//                . $project->getActivityRecordFirst()->getWindowTitle() . PHP_EOL;
+        }
+
+        $this->echoDurationText($durationInSecondsTotal, 'Total');
+        echo PHP_EOL;
+    }
+
+    /**
+     * @param $durationInSecondsSprint
+     */
+    private function echoDurationText($durationInSecondsSprint, ?string $header = null): void
+    {
+        if(isset($header)) {
+            echo PHP_EOL;
+            echo '---------------------' . PHP_EOL;
+            echo '  ' . $header . PHP_EOL;
+            echo '---------------------' . PHP_EOL;
+        }
+
+        $hours = floor($durationInSecondsSprint / 60 / 60);
+        $minutes = floor($durationInSecondsSprint / 60) - ($hours * 60 * 60);
+        $seconds = round($durationInSecondsSprint - ($minutes * 60) - ($hours * 60 * 60));
+
+        echo 'Duration: ' . $durationInSecondsSprint . ' seconds ~ ' . $hours . ' h ' . $minutes . ' min ' . $seconds . ' s' . PHP_EOL;
+    }
+
 }

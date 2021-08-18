@@ -3,15 +3,12 @@ declare(strict_types=1);
 
 namespace ResponsibleTime\Timeline\Projects;
 
+use DateTimeInterface;
 use ResponsibleTime\SettingsProject;
 use ResponsibleTime\Timeline\TimelineItem;
 
-class TimelineOfProjectsItem
+class TimelineOfProjectsItem extends TimelineOfProjectsItemAbstract
 {
-    private ?TimelineItem $timelineItem;
-    private string $projectTitle;
-    private string $activityTypeTitle;
-
     public function __construct(TimelineItem $timelineItem)
     {
         $projectsSettings = SettingsProject::PROJECTS_WE_TRACK_TIME_ON;
@@ -33,9 +30,11 @@ class TimelineOfProjectsItem
                     continue;
                 }
 
+                $windowTitleMatch = [];
                 $isMatching = preg_match(
                     $activityPatterns['WindowTitle'],
-                    $timelineItem->getActivityRecord()->getWindowTitle()->__toString()
+                    $timelineItem->getActivityRecord()->getWindowTitle()->__toString(),
+                    $windowTitleMatch
                 );
                 if(!$isMatching) {
                     // Skip if WmClass does not match
@@ -44,6 +43,7 @@ class TimelineOfProjectsItem
 
                 $this->timelineItem = $timelineItem;
                 $this->projectTitle = $projectTitle;
+                $this->taskTitle = (string) reset($windowTitleMatch);
                 $this->activityTypeTitle = $activityTypeTitle;
 
                 return; // we just found the project, end the search;
@@ -52,8 +52,14 @@ class TimelineOfProjectsItem
         }
     }
 
-    public function isConsumableItem(): bool
+    public function isConsumable(): bool
     {
         return isset($this->timelineItem);
     }
+
+    public function getDateTimeEnd(): DateTimeInterface
+    {
+        return $this->timelineItem->getTo();
+    }
+
 }

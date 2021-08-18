@@ -8,7 +8,7 @@ class Settings
     /**
      * Directory in where the files containing activity records may be found
      */
-    public const DIR_OF_ACTIVITY_RECORDS = '/home/paulius/.ResponsibleTime/activities/DemoData/';
+    public const DIR_OF_ACTIVITY_RECORDS = '/home/paulius/.ResponsibleTime/activities/';
 
 
     /**

@@ -58,14 +58,24 @@ class Timeline
             $this->getItemPreliminary()->getTo(),
         );
 
-        $this->streamToTimelineOfProjects($activityRecordTimeLineItem);
+        $lastItemSaved = null;
+        if(!empty($this->items)) {
+            $lastItemSaved = end($this->items);
+        }
+
+        $this->streamToTimelineOfProjectsBeforeRegisteringTheItem($activityRecordTimeLineItem, $lastItemSaved);
 
         $this->items[] = $activityRecordTimeLineItem;
         $this->resetItemPreliminary();
     }
 
-    private function streamToTimelineOfProjects(TimelineItem $activityRecordTimeLineItem)
+    private function streamToTimelineOfProjectsBeforeRegisteringTheItem(TimelineItem $activityRecordTimeLineItem, ?TimelineItem $lastItemSaved)
     {
-        $this->timelineOfProjects->consumeItem($activityRecordTimeLineItem);
+        $this->timelineOfProjects->consumeItem($activityRecordTimeLineItem, $lastItemSaved);
+    }
+
+    public function getTimelineOfProjects(): TimelineOfProjects
+    {
+        return $this->timelineOfProjects;
     }
 }

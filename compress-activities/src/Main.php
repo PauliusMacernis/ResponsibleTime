@@ -400,12 +400,6 @@ class Main
 
             $time = clone $startDateTime;
 
-            try{
-                $project->getDateTimeEnd();
-            } catch (\Throwable $e) {
-                echo "Here is the issue";
-            }
-
             $diff = $time->diff($project->getDateTimeEnd());
             $durationInSecondsSprint = ($diff->days * 24 * 60 * 60) + ($diff->h * 60 * 60) + ($diff->i * 60) + ($diff->s);
 

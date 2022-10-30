@@ -1,10 +1,16 @@
-The information down bellow is not accurate, nor up-to date. Check `README.md` files in subdirectories to find out more.
-
 # Responsible time
-Collects computer UI activities of yours into YOUR computer (Only Ubuntu OS is supported for now),  
-compresses the collected activities into summaries ready to be copy > paste to anywhere YOU wish.  
+Constantly collects computer UI activities of yours into text files of YOUR computer (Only Ubuntu OS is supported for now).  
+In case you need a summary, compresses the collected activities (aka. lines of files) into summaries ready to be copy > paste to anywhere YOU wish.  
+
+For more info on the details how it all works, look into README.md within each of the directories: `./collect-activities`, `./compress-activities`.  
+
+## Related project:  
+
+https://github.com/PauliusMacernis/RegularWebcamAndScreenShots  
 
 
+
+<!--
 ## What's done
 
 - *For Ubuntu 20.04 users only:* Scan daily activities, write records to the log file. See `collect-activities`
@@ -98,3 +104,4 @@ It seems the required lists to make may be these:
 - Google calendar credentials (to look for the time slots, to book the meeting)
 - Working hours (to schedule meetings on the right time, etc.)
 - People list (email aliases, Slack info, etc.)
+-->

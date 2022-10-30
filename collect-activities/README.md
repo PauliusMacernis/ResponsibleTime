@@ -18,6 +18,8 @@ Make sure the paths are correct in the following examples! Especially:
 Collects info on what you do and logs that info to the directory on your machine.
 And here are instructions on how to install and activate the script collecting activities:
 
+- `sudo apt install wmctrl` - install the dependency "wmctrl" in order to interact with a EWMH/NetWM compatible X Window Manager
+- `wmctrl --version` - make sure you have "wmctrl" successfully installed, tested with wmctrl version 1.07
 - `mkdir -p ~/.ResponsibleTime/activities` - create a directory for storing records on your activities
 - `sudo cp /home/paulius/dev/ResponsibleTime/collect-activities/collect-activities.sh /usr/bin/responsible-time-collect-activities.sh` -  copy the script from repository to /usr/bin dir
 - `sudo chmod +x /usr/bin/responsible-time-collect-activities.sh` - make the script executable in the new place.
